@@ -1,6 +1,7 @@
 module tree_
 
 using IUP
+using Printf
 
 export
 	tree
@@ -14,7 +15,7 @@ function tree()
 	init_tree()								    # Initializes IupTree */
 	init_dlg()                                  # Initializes the dialog
 	dlg = IupGetHandle("dlg")                   # Retrieves the dialog handle
-	IupShowXY (dlg, IUP_CENTER, IUP_CENTER)     # Displays the dialog (at screen center)
+	IupShowXY(dlg, IUP_CENTER, IUP_CENTER)     # Displays the dialog(at screen center)
 	init_tree_atributes()                       # Initializes attributes, can be done here or anywhere */
 
 	IupMainLoop()                               # Initializes IUP main loop
@@ -25,13 +26,13 @@ end
 function init_tree()
 	tree = IupTree()
 
-	IupSetCallback(tree, "RENAME_CB", cfunction(rename_cb, Cint, (Ptr{Ihandle}, Cint, Ptr{Uint8})))
-	IupSetCallback(tree, "EXECUTELEAF_CB", cfunction(executeleaf_cb, Cint, (Ptr{Ihandle}, Cint)))
-	IupSetCallback(tree, "BRANCHCLOSE_CB", cfunction(branchclose_cb, Cint, (Ptr{Ihandle}, Cint)))
-	IupSetCallback(tree, "BRANCHOPEN_CB",  cfunction(branchopen_cb,  Cint, (Ptr{Ihandle}, Cint)))
-	IupSetCallback(tree, "RIGHTCLICK_CB",  cfunction(rightclick_cb,  Cint, (Ptr{Ihandle}, Cint)))
-	IupSetCallback(tree, "DRAGDROP_CB",    cfunction(dragdrop_cb, Cint, (Ptr{Ihandle},Cint,Cint,Cint,Cint)))
-	IupSetCallback(tree, "K_ANY",          cfunction(k_any_cb, Cint, (Ptr{Ihandle},Cint)))
+	IupSetCallback(tree, "RENAME_CB",      @cfunction($rename_cb, Cint, (Ptr{Ihandle}, Cint, Ptr{UInt8})))
+	IupSetCallback(tree, "EXECUTELEAF_CB", @cfunction($executeleaf_cb, Cint, (Ptr{Ihandle}, Cint)))
+	IupSetCallback(tree, "BRANCHCLOSE_CB", @cfunction($branchclose_cb, Cint, (Ptr{Ihandle}, Cint)))
+	IupSetCallback(tree, "BRANCHOPEN_CB",  @cfunction($branchopen_cb,  Cint, (Ptr{Ihandle}, Cint)))
+	IupSetCallback(tree, "RIGHTCLICK_CB",  @cfunction($rightclick_cb,  Cint, (Ptr{Ihandle}, Cint)))
+	IupSetCallback(tree, "DRAGDROP_CB",    @cfunction($dragdrop_cb, Cint, (Ptr{Ihandle},Cint,Cint,Cint,Cint)))
+	IupSetCallback(tree, "K_ANY",          @cfunction($k_any_cb, Cint, (Ptr{Ihandle},Cint)))
 
 	#IupSetAttribute(tree, "FONT","COURIER_NORMAL");
 	#IupSetAttribute(tree, "CTRL","YES");
@@ -70,26 +71,26 @@ function init_dlg()
 	IupSetHandle("dlg",dlg)
 end
 
-function rename_cb(h::Ptr{Ihandle}, id::Cint, name::Ptr{Uint8})
-	@printf("rename_cb (%d=%s)\n", id, name)
-	if (name == "fool")
+function rename_cb(h::Ptr{Ihandle}, id::Cint, name::Ptr{UInt8})
+	@printf("rename_cb(%d=%s)\n", id, name)
+	if(name == "fool")
 		return convert(Cint, IUP_IGNORE)
 	end
 	return convert(Cint, IUP_DEFAULT)
 end
 
 function executeleaf_cb(h::Ptr{Ihandle}, id::Cint)
-	@printf("executeleaf_cb (%d)\n", id)
+	@printf("executeleaf_cb(%d)\n", id)
 	return convert(Cint, IUP_DEFAULT)
 end
 
 function branchopen_cb(h::Ptr{Ihandle}, id::Cint)
-	@printf("branchopen_cb (%d)\n", id);
+	@printf("branchopen_cb(%d)\n", id);
 	return convert(Cint, IUP_DEFAULT)
 end
 
 function branchclose_cb(h::Ptr{Ihandle}, id::Cint)
-	@printf("branchclose_cb (%d)\n", id)
+	@printf("branchclose_cb(%d)\n", id)
 	return convert(Cint, IUP_DEFAULT)
 end
 
@@ -98,31 +99,31 @@ function rightclick_cb(h::Ptr{Ihandle}, id::Cint)
 	#static char id_string[10];
 
 	popup_menu = IupMenu(
-		IupItem ("Add Leaf","addleaf"),
-		IupItem ("Add Branch","addbranch"),
-		IupItem ("Rename Node","renamenode"),
-		IupItem ("Remove Node","removenode"),
+		IupItem("Add Leaf","addleaf"),
+		IupItem("Add Branch","addbranch"),
+		IupItem("Rename Node","renamenode"),
+		IupItem("Remove Node","removenode"),
 			IupSubmenu("Selection", IupMenu(
-				IupItem ("ROOT", "selectnode"),
-				IupItem ("LAST", "selectnode"),
-				IupItem ("PGUP", "selectnode"),
-				IupItem ("PGDN", "selectnode"),
-				IupItem ("NEXT", "selectnode"),
-				IupItem ("PREVIOUS", "selectnode"),
+				IupItem("ROOT", "selectnode"),
+				IupItem("LAST", "selectnode"),
+				IupItem("PGUP", "selectnode"),
+				IupItem("PGDN", "selectnode"),
+				IupItem("NEXT", "selectnode"),
+				IupItem("PREVIOUS", "selectnode"),
 				IupSeparator(),
-				IupItem ("INVERT", "selectnode"),
-				IupItem ("BLOCK", "selectnode"),
-				IupItem ("CLEARALL", "selectnode"),
-				IupItem ("MARKALL", "selectnode"),
-				IupItem ("INVERTALL", "selectnode"),
+				IupItem("INVERT", "selectnode"),
+				IupItem("BLOCK", "selectnode"),
+				IupItem("CLEARALL", "selectnode"),
+				IupItem("MARKALL", "selectnode"),
+				IupItem("INVERTALL", "selectnode"),
 				C_NULL)),
 	C_NULL);
-    
-	IupSetFunction("selectnode", cfunction(selectnode, Cint, (Ptr{Ihandle},)))
-	IupSetFunction("addleaf",    cfunction(addleaf, Cint, ()))
-	IupSetFunction("addbranch",  cfunction(addbranch, Cint, ()))
-	IupSetFunction("removenode", cfunction(removenode, Cint, ()))
-	IupSetFunction("renamenode", cfunction(renamenode, Cint, ()))
+
+	IupSetFunction("selectnode", @cfunction($selectnode, Cint, (Ptr{Ihandle},)))
+	IupSetFunction("addleaf",    @cfunction($addleaf, Cint, ()))
+	IupSetFunction("addbranch",  @cfunction($addbranch, Cint, ()))
+	IupSetFunction("removenode", @cfunction($removenode, Cint, ()))
+	IupSetFunction("renamenode", @cfunction($renamenode, Cint, ()))
 
 	id_string = @sprintf("%d",id)
 	IupSetAttribute(h, "VALUE", id_string)
@@ -170,13 +171,13 @@ function renamenode()
 end
 
 function dragdrop_cb(h::Ptr{Ihandle}, drag_id::Cint, drop_id::Cint, isshift::Cint, iscontrol::Cint)
-	@printf("dragdrop_cb (%d)->(%d)\n", drag_id, drop_id);
+	@printf("dragdrop_cb(%d)->(%d)\n", drag_id, drop_id);
 	return convert(Cint, IUP_DEFAULT)
 end
 
 # Callback called when a key is hit
 function k_any_cb(h::Ptr{Ihandle}, c::Cint)
-	if (c == K_DEL) 
+	if(c == K_DEL)
 		IupSetAttribute(h,"DELNODE","MARKED")
 	end
 	return convert(Cint, IUP_DEFAULT)

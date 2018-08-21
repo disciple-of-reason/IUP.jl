@@ -4,6 +4,7 @@
 module sample_
 
 using IUP
+using Printf
 
 export
 	sample
@@ -23,7 +24,7 @@ function sample()
 	IupOpen()	#Initializes IUP
 
 	IupSetGlobal("SINGLEINSTANCE", "Iup Sample");
-	if (IupGetGlobal("SINGLEINSTANCE") == C_NULL)
+	if(IupGetGlobal("SINGLEINSTANCE") == C_NULL)
 		IupClose()
 		return
 	end
@@ -38,20 +39,20 @@ end
 function SampleTest()
 
 	#img = IupImage(32,32, img_bits1)
-	#IupSetHandle ("img1", img)
-	# IupSetAttribute (img, "0", "0 0 0")
-	# IupSetAttribute (img, "1", "BGCOLOR")
-	# IupSetAttribute (img, "2", "255 0 0")
+	#IupSetHandle("img1", img)
+	# IupSetAttribute(img, "0", "0 0 0")
+	# IupSetAttribute(img, "1", "BGCOLOR")
+	# IupSetAttribute(img, "2", "255 0 0")
 
 	img = load_image_Tecgraf()
-	IupSetHandle ("img1", img)
+	IupSetHandle("img1", img)
 
 	img = IupImage(32,32, pointer(img_bits2()))
-	IupSetHandle ("img2", img)
-	IupSetAttribute (img, "0", "0 0 0")
-	IupSetAttribute (img, "1", "0 255 0")
-	IupSetAttribute (img, "2", "BGCOLOR")
-	IupSetAttribute (img, "3", "255 0 0")
+	IupSetHandle("img2", img)
+	IupSetAttribute(img, "0", "0 0 0")
+	IupSetAttribute(img, "1", "0 255 0")
+	IupSetAttribute(img, "2", "BGCOLOR")
+	IupSetAttribute(img, "3", "255 0 0")
 
 	mnu = IupMenu(
 		IupSubmenu("IupSubmenu 1",
@@ -61,36 +62,36 @@ function SampleTest()
 			IupSetAttributes(IupItem("IupItem 2 Disabled"), "ACTIVE=NO"),
 		)),
 		IupItem("IupItem 3"),
-		IupItem("IupItem 4"), 
+		IupItem("IupItem 4"),
 		)
 	IupSetHandle("mnu",mnu)
 
 	_frm_1 = IupFrame(
 		IupVbox(
-			set_callbacks(IupSetAttributes(IupButton("Button Text"), "PADDING=5x5")), 
+			set_callbacks(IupSetAttributes(IupButton("Button Text"), "PADDING=5x5")),
 			IupSetCallbacks(set_callbacks(IupSetAttributes(IupButton("Text"),"IMAGE=img1, PADDING=5x5")),
 				"ACTION",
-				cfunction(action1_cb, Int, (Ptr{Ihandle},)),
+				@cfunction(action1_cb, Int, (Ptr{Ihandle},)),
 				C_NULL
 				),
 			IupSetCallbacks(set_callbacks(IupSetAttributes(IupButton(""), "IMAGE=img1")),
 				"ACTION",
-				cfunction(action2_cb, Int, (Ptr{Ihandle},)),
+				@cfunction(action2_cb, Int, (Ptr{Ihandle},)),
 				C_NULL),
 			IupSetCallbacks(set_callbacks(IupSetAttributes(IupButton(""), "IMAGE=img1,IMPRESS=img2")),
 				"ACTION",
-				cfunction(action3_cb, Int, (Ptr{Ihandle},)),
+				@cfunction(action3_cb, Int, (Ptr{Ihandle},)),
 				C_NULL),
 			IupSetCallbacks(set_callbacks(IupSetAttributes(IupButton(""), "BGCOLOR=\"255 0 128\", SIZE=20x10")),
 				"ACTION",
-				cfunction(action3_cb, Int, (Ptr{Ihandle},)),
+				@cfunction(action3_cb, Int, (Ptr{Ihandle},)),
 				C_NULL)
 		))
 	IupSetAttribute(_frm_1,"TITLE","IupButton")
 
 	_frm_2 = IupFrame(
 		IupVbox(
-			IupLabel("Label Text"), 
+			IupLabel("Label Text"),
 			IupSetAttributes(IupLabel(""), "SEPARATOR=HORIZONTAL, MAXSIZE=150, NAME=SAMP_SEP"),
 			IupSetAttributes(IupLabel(""), "IMAGE=img1")
 		));
@@ -102,7 +103,7 @@ function SampleTest()
 			set_callbacks(IupSetAttributes(IupToggle(""), "VALUE=ON,IMAGE=img1,IMPRESS=img2")),
 			set_callbacks(IupSetAttributes(IupToggle(""), "VALUE=ON,IMAGE=img1")),
 			IupSetAttributes(IupFrame(IupRadio(IupVbox(
-				set_callbacks(IupToggle("Toggle Text")), 
+				set_callbacks(IupToggle("Toggle Text")),
 				set_callbacks(IupToggle("Toggle Text"))
 				))), "TITLE=IupRadio")
 			))
@@ -160,7 +161,7 @@ function SampleTest()
 
 	val = IupVal(C_NULL)
 	set_callbacks(val)
-  
+
 	pbar = IupProgressBar()
 	IupSetAttribute(pbar, "VALUE", "0.5")
 	set_callbacks(pbar)
@@ -221,7 +222,7 @@ function SampleTest()
 	#IupSetAttribute(box, "FGCOLOR", "255 0 0")
 	#IupSetAttribute(dlg,"RASTERSIZE","1000x800")
 
-	IupSetCallback(dlg, "COPYDATA_CB", cfunction(copydata_cb, Int, (Ptr{Ihandle}, Ptr{Uint8}, Int)))
+	IupSetCallback(dlg, "COPYDATA_CB", @cfunction(copydata_cb, Int, (Ptr{Ihandle}, Ptr{UInt8}, Int)))
 
 	#IupSetGlobal("INPUTCALLBACKS", "Yes");
 	#IupSetFunction("GLOBALKEYPRESS_CB", (Icallback)globalkeypress_cb);
@@ -231,9 +232,9 @@ function SampleTest()
 
 	IupMap(dlg)
 
-	IupSetAttribute(tree, "TITLE0",       "Figures")  
+	IupSetAttribute(tree, "TITLE0",       "Figures")
 	IupSetAttribute(tree, "ADDLEAF0",     "Other")         # new id=1
-	IupSetAttribute(tree, "ADDBRANCH1",   "triangle")      # new id=2    
+	IupSetAttribute(tree, "ADDBRANCH1",   "triangle")      # new id=2
 	IupSetAttribute(tree, "ADDLEAF2",     "equilateral")
 	IupSetAttribute(tree, "ADDLEAF3",     "isoceles")
 	IupSetAttribute(tree, "ADDLEAF4",     "scalenus")
@@ -243,13 +244,13 @@ function SampleTest()
 	# IupSetAttribute(dlg,"RASTERSIZE", C_NULL);
 end
 
-function copydata_cb(ih::Ptr{Ihandle}, value::Ptr{Uint8}, size::Int)
+function copydata_cb(ih::Ptr{Ihandle}, value::Ptr{UInt8}, size::Int)
 	@printf("COPYDATA(%s, %d)\n", bytestring(value), size)
 	return IUP_DEFAULT
 end
 
 function set_callbacks(ih::Ptr{Ihandle})
-	IupSetCallback(ih, "VALUECHANGED_CB", cfunction(valuechanged_cb, Int, (Ptr{Ihandle},)))
+	IupSetCallback(ih, "VALUECHANGED_CB", @cfunction(valuechanged_cb, Int, (Ptr{Ihandle},)))
 
 	#IupSetCallback(ih, "GETFOCUS_CB", (Icallback)getfocus_cb);
 	#IupSetCallback(ih, "KILLFOCUS_CB", (Icallback)killfocus_cb);
@@ -257,7 +258,7 @@ function set_callbacks(ih::Ptr{Ihandle})
 	#IupSetCallback(ih, "ENTERWINDOW_CB", (Icallback)enterwindow_cb);
 	#IupSetCallback(ih, "LEAVEWINDOW_CB", (Icallback)leavewindow_cb);
 
-	IupSetCallback(ih, "K_ANY", cfunction(k_any, Int, (Ptr{Ihandle}, Int)))
+	IupSetCallback(ih, "K_ANY", @cfunction(k_any, Int, (Ptr{Ihandle}, Int)))
 	#IupSetCallback(ih, "HELP_CB", (Icallback)help_cb)
 
 	return ih
@@ -287,18 +288,18 @@ function valuechanged_cb(ih::Ptr{Ihandle})
 end
 
 function k_any(ih::Ptr{Ihandle}, c::Int)
-	if (iup_isprint(c))
+	if(iup_isprint(c))
 		printf("K_ANY(%s, %d = %s \'%c\')\n", IupGetClassName(ih), c, iupKeyCodeToName(c), (char)c)
 	else
 		@printf("K_ANY(%s, %d = %s)\n", IupGetClassName(ih), c, iupKeyCodeToName(c))
 	end
-	if (c == K_r)
-		IupRecordInput("inputtest.iup", IUP_RECTEXT); return IUP_IGNORE		#IUP_RECBINARY, IUP_RECTEXT 
+	if(c == K_r)
+		IupRecordInput("inputtest.iup", IUP_RECTEXT); return IUP_IGNORE		#IUP_RECBINARY, IUP_RECTEXT
 	end
-	if (c == K_s)
+	if(c == K_s)
 		IupRecordInput(NULL, 0); IupPlayInput(NULL); return IUP_IGNORE
 	end
-	if (c == K_p)
+	if(c == K_p)
 		IupPlayInput("inputtest.iup"); return IUP_IGNORE
 	end
 	return IUP_CONTINUE
@@ -332,15 +333,15 @@ end
 function show_menu(ih::Ptr{Ihandle})
 	menu_file = IupMenu(
 		IupSetAttributes(IupItem("Item with Image", "item_cb"), "IMAGE=image_tec"),
-		IupSetAttributes(IupItem("Toggle using VALUE"), "VALUE=ON, KEY=K_V"), 
-		IupSetAttributes(IupItem("Auto &Toggle", "item_cb"), "AUTOTOGGLE=YES, VALUE=OFF, IMAGE=image_test, IMPRESS=image_test_pressed"), 
-		IupSeparator(), 
-		IupItem("E&xit (Close)")
+		IupSetAttributes(IupItem("Toggle using VALUE"), "VALUE=ON, KEY=K_V"),
+		IupSetAttributes(IupItem("Auto &Toggle", "item_cb"), "AUTOTOGGLE=YES, VALUE=OFF, IMAGE=image_test, IMPRESS=image_test_pressed"),
+		IupSeparator(),
+		IupItem("E&xit(Close)")
 		)
 	menu = IupMenu(
-		IupSetAttributes(IupSubmenu("Submenu", menu_file), "KEY=K_S, IMAGE=image_tec"), 
-		IupItem("Item", "item_cb"), 
-		IupSetAttributes(IupItem("Item", "item_cb"), "VALUE=ON"), 
+		IupSetAttributes(IupSubmenu("Submenu", menu_file), "KEY=K_S, IMAGE=image_tec"),
+		IupItem("Item", "item_cb"),
+		IupSetAttributes(IupItem("Item", "item_cb"), "VALUE=ON"),
 		IupSetAttributes(IupItem("Item", "item_cb"), "KEY=K_I, IMAGE=image_tec")
 		)
 
@@ -352,7 +353,7 @@ function show_menu(ih::Ptr{Ihandle})
 end
 
 function load_image_Tecgraf()
-	imgdata = uint8([
+	imgdata = map(UInt8, [
 	0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 88, 95, 108, 1, 90, 100, 117, 99, 123, 138, 166, 126, 137, 152, 181, 60, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0,
 	0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 95, 105, 123, 147, 122, 137, 165, 255, 136, 152, 183, 255, 132, 149, 179, 250, 133, 149, 178, 69, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0,
 	0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 92, 100, 115, 43, 111, 125, 150, 253, 140, 158, 190, 255, 135, 151, 182, 255, 132, 149, 179, 255, 131, 147, 177, 217, 153, 164, 188, 3, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0,
@@ -392,7 +393,7 @@ function load_image_Tecgraf()
 end
 
 function load_image_LogoTecgraf()
-	imgdata = uint8([
+	imgdata = map(UInt8, [
 	0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 108, 120, 143, 125, 132, 148, 178, 173, 133, 149, 178, 17, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0,
 	0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 100, 110, 130, 48, 130, 147, 177, 254, 124, 139, 167, 254, 131, 147, 176, 137, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0,
 	0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 115, 128, 153, 134, 142, 159, 191, 194, 47, 52, 61, 110, 114, 128, 154, 222, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0,
@@ -416,7 +417,7 @@ function load_image_LogoTecgraf()
 end
 
 function img_bits1()
-	img = uint8([
+	img = map(UInt8, [
 	 1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,2,2,2,2,2,2,2,2,2,2,2,2,2,2,2,2,1
 	,1,1,1,1,1,1,1,1,1,1,1,1,1,1,2,2,2,2,2,2,2,2,2,2,2,2,2,2,2,2,1,1
 	,1,1,1,1,1,1,1,1,1,1,1,1,1,2,2,2,2,2,2,2,2,2,2,2,2,2,2,2,2,1,1,1
@@ -453,7 +454,7 @@ function img_bits1()
 end
 
 function img_bits2()
-	img = uint8([
+	img = map(UInt8, [
 	 2,2,2,2,2,2,2,2,2,2,2,2,2,2,2,3,3,3,3,3,3,3,3,3,3,3,3,3,3,3,3,2
 	,2,2,2,2,2,2,2,2,2,2,2,2,2,2,3,3,3,3,3,3,3,3,3,3,3,3,3,3,3,3,2,2
 	,2,2,2,2,2,2,2,2,2,2,2,2,2,3,3,3,3,3,3,3,3,3,3,3,3,3,3,3,3,2,2,2

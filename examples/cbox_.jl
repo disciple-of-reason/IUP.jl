@@ -14,32 +14,32 @@ include("../src/libiup_h.jl")
 function cbox()
 	IupOpen()	#Initializes IUP
 
-	IupControlsOpen()    
+	IupControlsOpen()
 	func_1()
 	IupShowXY(IupGetHandle("dlg"),IUP_CENTER,IUP_CENTER)
 
 	IupMainLoop()                               # Initializes IUP main loop
 	IupClose()                                  # And close it when ready
-	
-	# Don't understand. The profiler reports minuscule times (max = 0.03 s)
-	# but the whole thing takes about ~3.4 s (first run)
+
+	# Don't understand. The profiler reports minuscule times(max = 0.03 s)
+	# but the whole thing takes about ~3.4 s(first run)
 	#@iprofile report
 end
 
 # -----------------------------------------------------------------------------------------
-function func_1 ()
+function func_1()
 	img = IupImage(32,32, img_bits1())
-	IupSetHandle ("img1", img)
-	IupSetAttribute (img, "0", "0 0 0")
-	IupSetAttribute (img, "1", "BGCOLOR")
-	IupSetAttribute (img, "2", "255 0 0")
+	IupSetHandle("img1", img)
+	IupSetAttribute(img, "0", "0 0 0")
+	IupSetAttribute(img, "1", "BGCOLOR")
+	IupSetAttribute(img, "2", "255 0 0")
 
 	img = IupImage(32,32, img_bits2())
-	IupSetHandle ("img2", img)
-	IupSetAttribute (img, "0", "0 0 0")
-	IupSetAttribute (img, "1", "0 255 0")
-	IupSetAttribute (img, "2", "BGCOLOR")
-	IupSetAttribute (img, "3", "255 0 0")
+	IupSetHandle("img2", img)
+	IupSetAttribute(img, "0", "0 0 0")
+	IupSetAttribute(img, "1", "0 255 0")
+	IupSetAttribute(img, "2", "BGCOLOR")
+	IupSetAttribute(img, "3", "255 0 0")
 
 	_frm_1 = IupFrame(
 				IupVbox(
@@ -171,7 +171,7 @@ end
 # -----------------------------------------------------------------------------------------
 function create_mat()
 	mat = IupMatrix()
- 
+
 	IupSetAttribute(mat, "NUMCOL", "1")
 	IupSetAttribute(mat, "NUMLIN", "3")
 	IupSetAttribute(mat, "NUMCOL_VISIBLE", "1")
@@ -278,4 +278,3 @@ end
 #end     # @iprofile begin
 
 end 	# module
-

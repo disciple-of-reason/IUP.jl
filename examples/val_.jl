@@ -37,7 +37,7 @@ function val()
 
 	IupSetAttribute(dlg_val, "TITLE", "IupVal")
 	IupSetAttribute(dlg_val, "MARGIN", "10x10")
-	IupShowXY(dlg_val, IUP_CENTER, IUP_CENTER)  # Displays the dialog (at screen center)
+	IupShowXY(dlg_val, IUP_CENTER, IUP_CENTER)  # Displays the dialog(at screen center)
 
 	IupMainLoop()                               # Initializes IUP main loop
 	IupClose()                                  # And close it when ready
@@ -47,9 +47,9 @@ function button_press(c::Ptr{Ihandle}, a::Float64)
 	global lbl_v, lbl_h
 	type_ = bytestring(IupGetAttribute(c, "ORIENTATION"))
 
-	if (type_[1] == 'V')
+	if(type_[1] == 'V')
 		IupSetAttribute(lbl_v, "FGCOLOR", "255 0 0")
-	elseif (type_[1] == 'H')
+	elseif(type_[1] == 'H')
 		IupSetAttribute(lbl_h, "FGCOLOR", "255 0 0")
 	end
 
@@ -62,9 +62,9 @@ function button_release(c::Ptr{Ihandle}, a::Float64)
 	global lbl_v, lbl_h
 	type_ = bytestring(IupGetAttribute(c, "ORIENTATION"))
 
-	if (type_[1] == 'V')
+	if(type_[1] == 'V')
 		IupSetAttribute(lbl_v, "FGCOLOR", "0 0 0")
-	elseif (type_[1] == 'H')
+	elseif(type_[1] == 'H')
 		IupSetAttribute(lbl_h, "FGCOLOR", "0 0 0")
 	end
 
@@ -79,9 +79,9 @@ function mousemove(c::Ptr{Ihandle}, a::Float64)
 	buffer = @sprintf("VALUE=%.2f", a)
 	type_ = bytestring(IupGetAttribute(c, "ORIENTATION"))
 
-	if (type_[1] == 'V')
+	if(type_[1] == 'V')
 		IupStoreAttribute(lbl_v, "TITLE", buffer)
-	elseif (type_[1] == 'H')
+	elseif(type_[1] == 'H')
 		IupStoreAttribute(lbl_h, "TITLE", buffer)
 	end
 

@@ -103,7 +103,7 @@ const K_quoteleft = K_grave
 const K_quoteright = K_apostrophe
 
 macro isxkey(c)
-	return $c >= 128
+	return :($c >= 128)
 end
 #const isxkey = iup_isXkey
 # Skipping MacroDefinition: iup_isXkey(_c)((_c)>=128)
@@ -1100,9 +1100,9 @@ const IUP_GETPARAM_OK = -1
 const IUP_GETPARAM_INIT = -2
 const IUP_GETPARAM_CANCEL = -3
 const IUP_GETPARAM_HELP = -4
-typealias Ihandle Void
-typealias Icallback Ptr{Void}
-typealias Iparamcb Ptr{Void}
+Ihandle = Ptr{Nothing}
+Icallback = Ptr{Nothing}
+Iparamcb = Ptr{Nothing}
 # begin enum ANONYMOUS_1
 const IUP_SHOW = 0
 const IUP_RESTORE = 1

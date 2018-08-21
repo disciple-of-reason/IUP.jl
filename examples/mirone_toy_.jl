@@ -30,7 +30,7 @@ type LineSegPix
 end
 #function LineSegPix(x1, x2, y1, y2, active)
 #	x1 = 0; x2 = 0; y1 = 0; y2 = 0; active = false
-#end 
+#end
 
 include("../src/handlegraphics.jl")
 
@@ -119,7 +119,7 @@ function mirone_toy()
 	# associa os callbacks
 	setcallbacks(handles)
 
-	IupShowXY(main_window, IUP_CENTER, IUP_TOP) # Displays the dialog (at screen center)
+	IupShowXY(main_window, IUP_CENTER, IUP_TOP) # Displays the dialog(at screen center)
 	IupMainLoop()                               # Initializes IUP main loop
 	IupClose()                                  # And close it when ready
 
@@ -187,10 +187,10 @@ function fButtonCB(hand::Ptr{Ihandle}, b::Char, e::Integer, x::Integer, y::Integ
 
 	set_current_point(handles.iup_canvas, [x,y])
 
-	if (b == IUP_BUTTON1)		# Left button
-		if (e != 0)				# button was pressed
+	if(b == IUP_BUTTON1)		# Left button
+		if(e != 0)				# button was pressed
 			line_seg = getappdata(handles.iup_canvas, "lineSeg")
-			if ((try isempty(line_seg) end)) return IUP_DEFAULT end
+			if((try isempty(line_seg) end)) return IUP_DEFAULT end
 @show(line_seg)
 			line_seg.x1 = x
 			line_seg.y1 = y
@@ -210,31 +210,31 @@ function polygon(handles::Handles, what::Integer, x::Integer, y::Integer)
 
 	line_seg = getappdata(handles.iup_canvas, "lineSeg")
 #@show(line_seg)
-	if ((try isempty(line_seg) end) || !line_seg.active) return end
+	if((try isempty(line_seg) end) || !line_seg.active) return end
 #@show(what)
 
-	if (what == NEWPOINT)
-		if (poly_lastwhat != CLOSE)
+	if(what == NEWPOINT)
+		if(poly_lastwhat != CLOSE)
 			cdCanvasLine(line_seg.x1, line_seg.y1, line_seg.x2, line_seg.y2);      # ...apaga a anterior e...
 			cdCanvasLine(line_seg.x1, line_seg.y1, x, y);        # desenha a definitiva
 		end
 		line_seg.x1 = x;                        # novo segmento comeca no...
 		line_seg.y1 = y;                        # fim do primeiro
-	elseif (what == MOVE)
-		if (poly_lastwhat == MOVE)
+	elseif(what == MOVE)
+		if(poly_lastwhat == MOVE)
 			cdCanvasLine(handles.cd_canvas, line_seg.x1, line_seg.y1, line_seg.x2, line_seg.y2);      # apaga o segmento velho
 		end
 		cdCanvasLine(handles.cd_canvas, line_seg.x1, line_seg.y1, x, y);     # desenha o novo
 		line_seg.x2 = x;                        # e o novo se...
 		line_seg.y2 = y;                        # torna velho
-	elseif (what == REPAINT)
+	elseif(what == REPAINT)
 		cdCanvasLine(handles.cd_canvas, line_seg.x1, line_seg.y1, line_seg.x2, line_seg.y2);        # recupera o segmento perdido
 		return                             # nao modifica lastwhat
-	elseif (what == CLOSE)
-		if (poly_lastwhat != CLOSE)
+	elseif(what == CLOSE)
+		if(poly_lastwhat != CLOSE)
 			cdLine(handles.cd_canvas, line_seg.x1, line_seg.y1, line_seg.x2, line_seg.y2);        # apaga o ultimo segmento
 			# apaga o poligono temporario inteiro
-			for (i = 1:ctgc.num_points-1)
+			for(i = 1:ctgc.num_points-1)
 				cdCanvasLine(handles.cd_canvas, ctgc.points[i].x, ctgc.points[i].y, ctgc.points[i+1].x, ctgc.points[i+1].y);
 			end
 		end
@@ -251,10 +251,10 @@ function cmdDrawPoly(iup_canvas::Ptr{Ihandle})
 
 	setappdata(handles.iup_canvas, "lineSeg", line_seg)
 
-	cdCanvasBackground(handles.cd_canvas, IUP_CD.CD_WHITE); 
-	cdCanvasClear(handles.cd_canvas); 
-	cdCanvasLineWidth(handles.cd_canvas, 3); 
-	cdCanvasLineStyle(handles.cd_canvas, IUP_CD.CD_CONTINUOUS); 
+	cdCanvasBackground(handles.cd_canvas, IUP_CD.CD_WHITE);
+	cdCanvasClear(handles.cd_canvas);
+	cdCanvasLineWidth(handles.cd_canvas, 3);
+	cdCanvasLineStyle(handles.cd_canvas, IUP_CD.CD_CONTINUOUS);
 	cdCanvasForeground(handles.cd_canvas, cdEncodeAlpha(IUP_CD.CD_DARK_MAGENTA, char(128)))
 	cdCanvasWriteMode(handles.cd_canvas, IUP_CD.CD_NOT_XOR)
 	cdCanvasActivate(handles.cd_canvas)
@@ -265,7 +265,7 @@ end
 function cmOpen(iup_canvas::Ptr{Ihandle})
 	# Retrieve a file name
 	FileName = "*.*" * repeat(" ",253)
-	if (IupGetFile(FileName) != 0)
+	if(IupGetFile(FileName) != 0)
 		return IUP_DEFAULT
 	end
 
@@ -277,7 +277,7 @@ end
 function ShowImage(FileName::String, iup_dialog::Ptr{Ihandle})
 	image = IupGetAttribute(iup_dialog, "imImage")		# typeof(image) => Ptr{Uint8}
 	image = convert(Ptr{imImage}, image)		# If I use Ptr{imImage} it Booms???
-	if (image != C_NULL)
+	if(image != C_NULL)
 		imImageDestroy(image)
 	end
 	IupSetAttribute(iup_dialog, "imImage")
@@ -286,8 +286,8 @@ function ShowImage(FileName::String, iup_dialog::Ptr{Ihandle})
 	error = pointer([0])
 	image = imFileImageLoadBitmap(FileName, 0, error)
 	error = unsafe_load(error)
-	if (error != 0)	PrintError(error)	end
-	if (image == C_NULL) return end
+	if(error != 0)	PrintError(error)	end
+	if(image == C_NULL) return end
 #
 	#image = load_with_gmt(FileName)
 
@@ -306,7 +306,7 @@ end
 # --------------------------------------------------------------------------------
 function cbCanvasRepaint(iup_canvas::Ptr{Ihandle})
 	cd_canvas = convert(Ptr{cdCanvas}, IupGetAttribute(iup_canvas, "cdCanvas"))
-	if (cd_canvas == C_NULL)
+	if(cd_canvas == C_NULL)
 		return IUP_DEFAULT
 	end
 
@@ -314,7 +314,7 @@ function cbCanvasRepaint(iup_canvas::Ptr{Ihandle})
 	cdCanvasClear(cd_canvas);
 
 	image = convert(Ptr{imImage}, IupGetAttribute(iup_canvas, "imImage"))
-	if (image == C_NULL)
+	if(image == C_NULL)
 		return IUP_DEFAULT
 	end
 
@@ -333,7 +333,7 @@ function load_with_gmt(FileName::String)
 	I = gmt("read -Ti " * FileName)
 #	I = gmt("read C://progs_cygw//GMTdev//gmt5//branches//5.2.0//test//grdimage//gdal//needle.jpg -Ti")
 	n = I.n_columns * I.n_rows
-	if (I.LayerCount >= 3)
+	if(I.LayerCount >= 3)
 		data = pointer([pointer(I.image[:,:,1]), pointer(I.image[:,:,2]), pointer(I.image[:,:,3])])
 		cmap = C_NULL
 	else
@@ -341,7 +341,7 @@ function load_with_gmt(FileName::String)
 	end
 	palette_count = size(I.colormap, 1)
 	color_space = IM_RGB
-	if (size(I.colormap,1) > 1)
+	if(size(I.colormap,1) > 1)
 		cmap = I.colormap
 		color_space = IM_MAP
 	end
@@ -372,7 +372,7 @@ function imlabCreateButtonImages()
 		,2,2,2,0,0,0,0,0,0,0,0,0,0,0,0,2
 	]
 
-	new_colors = [                                      
+	new_colors = [
 		"0 0 0",
 		"132 132 132",
 		"BGCOLOR",
@@ -442,12 +442,12 @@ function CreateButtonImage(w::Int, h::Int, bits, colors, name::String)
 	iup_image = IupImage(w, h, bits)
 	IupSetHandle(name, iup_image)
 
-	while (colors[i] != "")
-		if (i > 16)
+	while(colors[i] != "")
+		if(i > 16)
 			aux_color_str = @sprintf("%d", i)
-			IupStoreAttribute(iup_image, aux_color_str, colors[i]); 
+			IupStoreAttribute(iup_image, aux_color_str, colors[i]);
 		else
-			IupStoreAttribute(iup_image, color_str[i], colors[i]); 
+			IupStoreAttribute(iup_image, color_str[i], colors[i]);
 		end
 		i += 1
 	end
@@ -459,19 +459,19 @@ end
 function CreateMainMenu()
 
 	# Creates items of menu File
-	item_new   = IupItem ("New","");
-	item_open  = IupItem ("Open Grid/Image", "");
-	item_close = IupItem ("Close", "");
-	item_exit  = IupItem ("Exit", "item_exit_act");
+	item_new   = IupItem("New","");
+	item_open  = IupItem("Open Grid/Image", "");
+	item_close = IupItem("Close", "");
+	item_exit  = IupItem("Exit", "item_exit_act");
 
 	# Creates items of menu Image
-	item_copy  = IupItem ("Copy", "");
-	item_paste = IupItem ("Paste", "")
+	item_copy  = IupItem("Copy", "");
+	item_paste = IupItem("Paste", "")
 
 	# Creates items for menu triangle
-	item_scalenus = IupItem ("Scalenus","")
-	item_isoceles = IupItem ("Isoceles", "")
-	item_equilateral = IupItem ("Equilateral", "")
+	item_scalenus = IupItem("Scalenus","")
+	item_isoceles = IupItem("Isoceles", "")
+	item_equilateral = IupItem("Equilateral", "")
 
 	# Create menu triangle
 	menu_triangle = IupMenu(item_equilateral, item_isoceles, item_scalenus)
@@ -480,49 +480,49 @@ function CreateMainMenu()
 	submenu_triangle = IupSubmenu("Triangle", menu_triangle)
 
 	# Creates items for menu create
-	item_line = IupItem ("Line", "")
-	item_circle = IupItem ("Circle", "")
+	item_line = IupItem("Line", "")
+	item_circle = IupItem("Circle", "")
 
 	# Creates menu create
 	menu_create = IupMenu(item_line, item_circle, submenu_triangle)
 
 	# Creates submenu create
-	submenu_create = IupSubmenu ("Create", menu_create)
+	submenu_create = IupSubmenu("Create", menu_create)
 
 	# Creates items of menu help
-	item_help = IupItem ("Help", "item_help_act")
-  
+	item_help = IupItem("Help", "item_help_act")
+
 	# Creates menus
-	menu_file  = IupMenu (item_new, item_open, item_close, IupSeparator(), item_exit)
-	menu_image = IupMenu (item_copy, item_paste, IupSeparator(), submenu_create)
-	menu_tools = IupMenu (IupItem("Tools",""))
-	menu_help  = IupMenu (item_help);
+	menu_file  = IupMenu(item_new, item_open, item_close, IupSeparator(), item_exit)
+	menu_image = IupMenu(item_copy, item_paste, IupSeparator(), submenu_create)
+	menu_tools = IupMenu(IupItem("Tools",""))
+	menu_help  = IupMenu(item_help);
 
 	# Creates submenus
-	submenu_file  = IupSubmenu ("File", menu_file)
-	submenu_image = IupSubmenu ("Image", menu_image)
-	submenu_tools = IupSubmenu ("Tools", menu_tools)
-	submenu_help  = IupSubmenu ("Help", menu_help)
+	submenu_file  = IupSubmenu("File", menu_file)
+	submenu_image = IupSubmenu("Image", menu_image)
+	submenu_tools = IupSubmenu("Tools", menu_tools)
+	submenu_help  = IupSubmenu("Help", menu_help)
 
 	# The menu Draw and its descendents
 	menu_draw = IupMenu(IupItem("Draw",""))
-	submenu_draw = IupSubmenu ("Draw", menu_draw)
+	submenu_draw = IupSubmenu("Draw", menu_draw)
 
 	# The menu Geography and its descendents
 	menu_geog = IupMenu(IupItem("Plot-coastline",""))
-	submenu_geog = IupSubmenu ("Geography", menu_geog)
+	submenu_geog = IupSubmenu("Geography", menu_geog)
 
 	# The menu Plates and its descendents
 	menu_plates = IupMenu(IupItem("Plate calculator",""))
-	submenu_plates = IupSubmenu ("Plates", menu_plates)
+	submenu_plates = IupSubmenu("Plates", menu_plates)
 
 	# The menu Mag/Grav and its descendents
 	menu_mag = IupMenu(IupItem("IGRF calculator",""))
-	submenu_mag = IupSubmenu ("Mag/Grav", menu_mag)
+	submenu_mag = IupSubmenu("Mag/Grav", menu_mag)
 
 	# The menu Seismology and its descendents
 	menu_seismic = IupMenu(IupItem("Seismicity",""))
-	submenu_seismic = IupSubmenu ("Seismology", menu_seismic)
+	submenu_seismic = IupSubmenu("Seismology", menu_seismic)
 
 	# The menu Tsunamis and its descendents
 	menu_tsu = IupMenu(IupItem("Tsunami Travel Time",""))

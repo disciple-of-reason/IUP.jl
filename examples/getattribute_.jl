@@ -1,6 +1,6 @@
 #=
   IupGetAttribute/Int/Float: Example
-  
+
   Uses IupGetAttribute/IupGetInt and IupGetFloat to print a number entered by the user.
   The printing will occur when the user exits the program. The number will be printed as an integer,
   a floating point and a text.
@@ -22,7 +22,7 @@ function getattribute()
 	field = IupText("")                                         # creates TEXT field
 	IupSetCallback(field, "ACTION", cfunction(number_action, Int, (Ptr{Ihandle}, Cint)))   # registers callback
 	IupSetCallback(field, "K_ANY", cfunction(k_any, Int, (Ptr{Ihandle}, Cint)))            # registers callback
-  
+
 	IupSetAttribute(field, "VALUE", "1.0")                      # defines initial value
 
 	message = IupLabel("Please, type any number: ")             # creates message
@@ -40,18 +40,18 @@ function getattribute()
 end
 
 function k_any(self::Ptr{Ihandle}, c::Cint)
-	if (c == K_CR)
+	if(c == K_CR)
 		return IUP_CLOSE
 	end
 	return IUP_CONTINUE
 end
 
-function number_action (self::Ptr{Ihandle}, c::Cint)
+function number_action(self::Ptr{Ihandle}, c::Cint)
 	caracteres_validos = "0123456789.+-Ee"
 
-	if ((search(caracteres_validos, char(c))) > 0)     # c is a valid character
+	if((search(caracteres_validos, char(c))) > 0)     # c is a valid character
 		return IUP_DEFAULT
-	elseif (iscntrl(char(c)))                          # c is a control character (TAB, BACKSPACE, ...)
+	elseif(iscntrl(char(c)))                          # c is a control character(TAB, BACKSPACE, ...)
 		return IUP_DEFAULT
 	end
 

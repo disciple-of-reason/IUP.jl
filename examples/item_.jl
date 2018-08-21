@@ -57,14 +57,14 @@ end
 
 function item_autosave_cb()
 	item_autosave = IupGetHandle("item_autosave")
-	if (IupGetInt(item_autosave, "VALUE"))
+	if(IupGetInt(item_autosave, "VALUE"))
 		IupMessage("Auto Save","OFF")
 		IupSetAttribute(item_autosave, "VALUE", "OFF")
 	else
 		IupMessage("Auto Save","ON")
 		IupSetAttribute(item_autosave, "VALUE", "ON")
 	end
-  
+
 	return IUP_DEFAULT
 end
 

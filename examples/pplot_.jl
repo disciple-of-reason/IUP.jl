@@ -23,7 +23,7 @@ global dial1::Ptr{Ihandle}, dial2::Ptr{Ihandle},          # dials for zooming */
         tgg3::Ptr{Ihandle}, tgg4::Ptr{Ihandle},            # grid show|hide toggles */
         tgg5::Ptr{Ihandle},                   		# legend show|hide toggle */
         tabs::Ptr{Ihandle}
-=# 
+=#
 global dial1, dial2
 global tgg1, tgg2
 global tgg3, tgg4
@@ -45,13 +45,13 @@ global tabs
 
 	vboxr = Array(Ptr{Ihandle}, MAXPLOT+1) 	# tabs containing the plots
 
-	IupControlsOpen();  # init the addicional controls library (we use IupTabs)
+	IupControlsOpen();  # init the addicional controls library(we use IupTabs)
 	IupPlotOpen();     # init IupPlot library
 
 	#  cdInitGdiPlus();
 
 	# create plots
-	for (ii = 1:MAXPLOT)
+	for(ii = 1:MAXPLOT)
 		plot[ii] = IupPlot()
 	end
 
@@ -139,7 +139,7 @@ global tabs
 	IupSetAttribute(vboxl, "EXPAND", "NO");
 
 	# right panel: tabs with plots
-	for (ii = 1:MAXPLOT)
+	for(ii = 1:MAXPLOT)
 		vboxr[ii] = IupVbox(plot[ii]); # each plot a tab
 		s = @sprintf("Plot %d", ii)
 		IupSetAttribute(vboxr[ii], "TABTITLE", s); # name each tab
@@ -234,8 +234,8 @@ function InitPlots()
 	IupSetAttribute(plot[1], "MARGINLEFT", "40")
 	IupSetAttribute(plot[1], "MARGINBOTTOM", "50")
 	IupSetAttribute(plot[1], "TITLEFONTSIZE", "16")
-	IupSetAttribute(plot[1], "AXS_XLABEL", "gnu (Foo)")
-	IupSetAttribute(plot[1], "AXS_YLABEL", "Space (m^3)")
+	IupSetAttribute(plot[1], "AXS_XLABEL", "gnu(Foo)")
+	IupSetAttribute(plot[1], "AXS_YLABEL", "Space(m^3)")
 	IupSetAttribute(plot[1], "AXS_YFONTSIZE", "7");
 	IupSetAttribute(plot[1], "AXS_YTICKFONTSIZE", "7");
 	IupSetAttribute(plot[1], "LEGENDSHOW", "YES");
@@ -249,7 +249,7 @@ function InitPlots()
 
 	theFac = 1.0 / (100*100*100)
 	IupPlotBegin(plot[1], 0);
-	for (theI = -100:100)
+	for(theI = -100:100)
 		x = float64(theI+50);
 		y = theFac*theI*theI*theI;
 		IupPlotAdd(plot[1], x, y)
@@ -260,7 +260,7 @@ function InitPlots()
 
 	theFac = 2.0/100;
 	IupPlotBegin(plot[1], 0);
-	for (theI = -100:100)
+	for(theI = -100:100)
 		x = float64(theI)
 		y = -theFac*theI;
 		IupPlotAdd(plot[1], x, y);
@@ -269,7 +269,7 @@ function InitPlots()
 	IupSetAttribute(plot[1], "DS_LEGEND", "Curve 1");
 
 	IupPlotBegin(plot[1], 0);
-	for (theI = -100:100)
+	for(theI = -100:100)
 		x = (0.01*theI*theI-30);
 		y = 0.01*theI;
 		IupPlotAdd(plot[1], x, y);
@@ -284,8 +284,8 @@ function InitPlots()
 	IupSetAttribute(plot[2], "MARGINLEFT", "55");
 	IupSetAttribute(plot[2], "MARGINBOTTOM", "50");
 	IupSetAttribute(plot[2], "BGCOLOR", "0 192 192");
-	IupSetAttribute(plot[2], "AXS_XLABEL", "Tg (X)");
-	IupSetAttribute(plot[2], "AXS_YLABEL", "Tg (Y)");
+	IupSetAttribute(plot[2], "AXS_XLABEL", "Tg(X)");
+	IupSetAttribute(plot[2], "AXS_YLABEL", "Tg(Y)");
 	IupSetAttribute(plot[2], "AXS_XAUTOMIN", "NO");
 	IupSetAttribute(plot[2], "AXS_XAUTOMAX", "NO");
 	IupSetAttribute(plot[2], "AXS_YAUTOMIN", "NO");
@@ -306,7 +306,7 @@ function InitPlots()
 
 	theFac = 1.0/(100*100*100);
 	IupPlotBegin(plot[2], 0);
-	for (theI = 0:100)
+	for(theI = 0:100)
 		x = float64(theI);
 		y = theFac*theI*theI*theI;
 		IupPlotAdd(plot[2], x, y);
@@ -315,7 +315,7 @@ function InitPlots()
 
 	theFac = 2.0/100;
 	IupPlotBegin(plot[2], 0);
-	for (theI = 0:100)
+	for(theI = 0:100)
 		x = float64(theI);
 		y = -theFac*theI;
 		IupPlotAdd(plot[2], x, y);
@@ -331,14 +331,14 @@ function InitPlots()
 	IupSetAttribute(plot[3], "GRID", "YES");
 	IupSetAttribute(plot[3], "AXS_XSCALE", "LOG10");
 	IupSetAttribute(plot[3], "AXS_YSCALE", "LOG2");
-	IupSetAttribute(plot[3], "AXS_XLABEL", "Tg (X)");
-	IupSetAttribute(plot[3], "AXS_YLABEL", "Tg (Y)");
+	IupSetAttribute(plot[3], "AXS_XLABEL", "Tg(X)");
+	IupSetAttribute(plot[3], "AXS_YLABEL", "Tg(Y)");
 	IupSetAttribute(plot[3], "AXS_XFONTSTYLE", "BOLD");
 	IupSetAttribute(plot[3], "AXS_YFONTSTYLE", "BOLD");
 
 	theFac = 100.0/(100*100*100);
 	IupPlotBegin(plot[3], 0);
-	for (theI = 0:100)
+	for(theI = 0:100)
 		x = (0.0001+theI*0.001);
 		y = (0.01+theFac*theI*theI*theI);
 		IupPlotAdd(plot[3], x, y);
@@ -356,7 +356,7 @@ function InitPlots()
 	kData = [1,2,3,4,5,6,7,8,9,0,1,2]
 
 	IupPlotBegin(plot[4], 1);
-	for (theI = 1:12)
+	for(theI = 1:12)
 		IupPlotAddStr(plot[4], kLables[theI], float64(kData[theI]))
 	end
 	IupPlotEnd(plot[4]);
@@ -385,7 +385,7 @@ function InitPlots()
 
 	theFac = 100.0/(100*100*100);
 	IupPlotBegin(plot[5], 0);
-	for (theI = 0:10)
+	for(theI = 0:10)
 		x = (0.0001+theI*0.001);
 		y = (0.01+theFac*theI*theI);
 		IupPlotAdd(plot[5], x, y);
@@ -395,7 +395,7 @@ function InitPlots()
 	IupSetAttribute(plot[5], "DS_SHOWVALUES", "YES");
 
 	IupPlotBegin(plot[5], 0);
-	for (theI = 0:10)
+	for(theI = 0:10)
 		x = (0.0001+theI*0.001);
 		y = (0.2-theFac*theI*theI);
 		IupPlotAdd(plot[5], x, y);
@@ -411,7 +411,7 @@ function InitPlots()
 
 	theFac = 100.0/(100*100*100);
 	IupPlotBegin(plot[6], 0);
-	for (theI = -10:10)
+	for(theI = -10:10)
 		x = (0.001*theI);
 		y = (0.01+theFac*theI*theI*theI);
 		IupPlotAdd(plot[6], x, y);
@@ -446,7 +446,7 @@ global tabs
 
   # autoscaling
   # X axis
-  if (IupGetInt(plot[ii], "AXS_XAUTOMIN") != 0 && IupGetInt(plot[ii], "AXS_XAUTOMAX") != 0)
+  if(IupGetInt(plot[ii], "AXS_XAUTOMIN") != 0 && IupGetInt(plot[ii], "AXS_XAUTOMAX") != 0)
     IupSetAttribute(tgg2, "VALUE", "ON");
     IupSetAttribute(dial2, "ACTIVE", "NO");
   else
@@ -454,7 +454,7 @@ global tabs
     IupSetAttribute(dial2, "ACTIVE", "YES");
   end
   # Y axis
-  if ( IupGetInt(plot[ii], "AXS_YAUTOMIN") != 0 && IupGetInt(plot[ii], "AXS_YAUTOMAX") != 0)
+  if( IupGetInt(plot[ii], "AXS_YAUTOMIN") != 0 && IupGetInt(plot[ii], "AXS_YAUTOMAX") != 0)
     IupSetAttribute(tgg1, "VALUE", "ON");
     IupSetAttribute(dial1, "ACTIVE", "NO");
   else
@@ -463,18 +463,18 @@ global tabs
   end
 
   # grid
-  if (IupGetInt(plot[ii], "GRID") != 0)
+  if(IupGetInt(plot[ii], "GRID") != 0)
     IupSetAttribute(tgg3, "VALUE", "ON");
     IupSetAttribute(tgg4, "VALUE", "ON");
   else
     # X axis
-    if (IupGetAttribute(plot[ii], "GRID") == 'V')
+    if(IupGetAttribute(plot[ii], "GRID") == 'V')
       IupSetAttribute(tgg3, "VALUE", "ON");
     else
       IupSetAttribute(tgg3, "VALUE", "OFF")
     end
     # Y axis
-    if (IupGetAttribute(plot[ii], "GRID") == 'H')
+    if(IupGetAttribute(plot[ii], "GRID") == 'H')
       IupSetAttribute(tgg4, "VALUE", "ON");
     else
       IupSetAttribute(tgg4, "VALUE", "OFF")
@@ -482,7 +482,7 @@ global tabs
   end
 
   # legend
-  if (IupGetInt(plot[ii], "LEGENDSHOW") != 0)
+  if(IupGetInt(plot[ii], "LEGENDSHOW") != 0)
     IupSetAttribute(tgg5, "VALUE", "ON");
   else
     IupSetAttribute(tgg5, "VALUE", "OFF")
@@ -496,14 +496,14 @@ end
 function tgg3_cb(self::Ptr{Ihandle}, v::Cint)
 	ii = tabs_get_index()
 
-	if (v != 0)
-		if (IupGetInt(tgg4, "VALUE") != 0)
+	if(v != 0)
+		if(IupGetInt(tgg4, "VALUE") != 0)
 			IupSetAttribute(plot[ii], "GRID", "YES");
 		else
 			IupSetAttribute(plot[ii], "GRID", "VERTICAL")
 		end
 	else
-		if (IupGetInt(tgg4, "VALUE") != 0)
+		if(IupGetInt(tgg4, "VALUE") != 0)
 			IupSetAttribute(plot[ii], "GRID", "NO");
 		else
 			IupSetAttribute(plot[ii], "GRID", "HORIZONTAL")
@@ -520,14 +520,14 @@ end
 function tgg4_cb(self::Ptr{Ihandle}, v::Cint)
 	ii = tabs_get_index()
 
-	if (v != 0)
-		if (IupGetInt(tgg3, "VALUE") != 0)
+	if(v != 0)
+		if(IupGetInt(tgg3, "VALUE") != 0)
 			IupSetAttribute(plot[ii], "GRID", "YES")
 		else
 			IupSetAttribute(plot[ii], "GRID", "HORIZONTAL")
 		end
 	else
-		if (IupGetInt(tgg3, "VALUE") != 0)
+		if(IupGetInt(tgg3, "VALUE") != 0)
 			IupSetAttribute(plot[ii], "GRID", "NO")
 		else
 			IupSetAttribute(plot[ii], "GRID", "VERTICAL")
@@ -556,7 +556,7 @@ function tabs_tabchange_cb(self::Ptr{Ihandle}, new_tab::Ptr{Ihandle})
 
 	# autoscaling
 	# X axis
-	if (IupGetInt(plot[ii], "AXS_XAUTOMIN") != 0 && IupGetInt(plot[ii], "AXS_XAUTOMAX") != 0)
+	if(IupGetInt(plot[ii], "AXS_XAUTOMIN") != 0 && IupGetInt(plot[ii], "AXS_XAUTOMAX") != 0)
 		IupSetAttribute(tgg2, "VALUE", "ON");
 		IupSetAttribute(dial2, "ACTIVE", "NO");
 	else
@@ -564,7 +564,7 @@ function tabs_tabchange_cb(self::Ptr{Ihandle}, new_tab::Ptr{Ihandle})
 		IupSetAttribute(dial2, "ACTIVE", "YES");
 	end
   # Y axis
-  if (IupGetInt(plot[ii], "AXS_YAUTOMIN") != 0 && IupGetInt(plot[ii], "AXS_YAUTOMAX") != 0)
+  if(IupGetInt(plot[ii], "AXS_YAUTOMIN") != 0 && IupGetInt(plot[ii], "AXS_YAUTOMAX") != 0)
     IupSetAttribute(tgg1, "VALUE", "ON");
     IupSetAttribute(dial1, "ACTIVE", "NO");
   else
@@ -573,19 +573,19 @@ function tabs_tabchange_cb(self::Ptr{Ihandle}, new_tab::Ptr{Ihandle})
   end
 
   # grid
-  if (IupGetInt(plot[ii], "GRID") != 0)
+  if(IupGetInt(plot[ii], "GRID") != 0)
     IupSetAttribute(tgg3, "VALUE", "ON");
     IupSetAttribute(tgg4, "VALUE", "ON");
   else
     # X axis
     s = bytestring(IupGetAttribute(plot[ii], "GRID"))
-    if (s[1] == 'V')
+    if(s[1] == 'V')
       IupSetAttribute(tgg3, "VALUE", "ON");
     else
       IupSetAttribute(tgg3, "VALUE", "OFF")
     end
     # Y axis
-    if (s[1] == 'H')
+    if(s[1] == 'H')
       IupSetAttribute(tgg4, "VALUE", "ON");
     else
       IupSetAttribute(tgg4, "VALUE", "OFF")
@@ -593,7 +593,7 @@ function tabs_tabchange_cb(self::Ptr{Ihandle}, new_tab::Ptr{Ihandle})
   end
 
   # legend
-  if (IupGetInt(plot[ii], "LEGENDSHOW") != 0)
+  if(IupGetInt(plot[ii], "LEGENDSHOW") != 0)
     IupSetAttribute(tgg5, "VALUE", "ON");
   else
     IupSetAttribute(tgg5, "VALUE", "OFF")
@@ -608,14 +608,14 @@ end
 function tgg3_cb(self::Ptr{Ihandle}, v)
   ii = tabs_get_index();
 
-  if (v != 0)
-    if (IupGetInt(tgg4, "VALUE"))
+  if(v != 0)
+    if(IupGetInt(tgg4, "VALUE"))
       IupSetAttribute(plot[ii], "GRID", "YES");
     else
       IupSetAttribute(plot[ii], "GRID", "VERTICAL")
     end
   else
-    if (!IupGetInt(tgg4, "VALUE"))
+    if(!IupGetInt(tgg4, "VALUE"))
       IupSetAttribute(plot[ii], "GRID", "NO");
     else
       IupSetAttribute(plot[ii], "GRID", "HORIZONTAL")
@@ -633,14 +633,14 @@ end
 function tgg4_cb(self::Ptr{Ihandle}, v)
   ii = tabs_get_index();
 
-  if (v != 0)
-    if (IupGetInt(tgg3, "VALUE"))
+  if(v != 0)
+    if(IupGetInt(tgg3, "VALUE"))
       IupSetAttribute(plot[ii], "GRID", "YES");
     else
       IupSetAttribute(plot[ii], "GRID", "HORIZONTAL");
     end
   else
-    if (!IupGetInt(tgg3, "VALUE"))
+    if(!IupGetInt(tgg3, "VALUE"))
       IupSetAttribute(plot[ii], "GRID", "NO");
     else
       IupSetAttribute(plot[ii], "GRID", "VERTICAL")
@@ -657,7 +657,7 @@ end
 function tgg5_cb(self::Ptr{Ihandle}, v::Cint)
   ii = tabs_get_index()
 
-  if (v != 0)
+  if(v != 0)
     IupSetAttribute(plot[ii], "LEGENDSHOW", "YES");
   else
     IupSetAttribute(plot[ii], "LEGENDSHOW", "NO")
@@ -674,7 +674,7 @@ end
 function tgg1_cb(self::Ptr{Ihandle}, v::Cint)
   ii = tabs_get_index();
 
-  if (v != 0)
+  if(v != 0)
     IupSetAttribute(dial1, "ACTIVE", "NO");
     IupSetAttribute(plot[ii], "AXS_YAUTOMIN", "YES");
     IupSetAttribute(plot[ii], "AXS_YAUTOMAX", "YES");
@@ -695,7 +695,7 @@ end
 function tgg2_cb(self::Ptr{Ihandle}, v::Cint)
   ii = tabs_get_index();
 
-  if (v != 0)
+  if(v != 0)
     IupSetAttribute(dial2, "ACTIVE", "NO");
     IupSetAttribute(plot[ii], "AXS_XAUTOMIN", "YES");
     IupSetAttribute(plot[ii], "AXS_XAUTOMAX", "YES");
@@ -728,19 +728,19 @@ function dial1_btnup_cb(self::Ptr{Ihandle}, angle::Cdouble)
 	x2 = IupGetFloat(plot[ii], "OLD_YMAX");
 
 	ss = IupGetAttribute(plot[ii], "AXS_YMODE");
-	if ( ss != C_NULL && ss[3] == '2' )
+	if( ss != C_NULL && ss[3] == '2' )
 		# LOG2:  one circle will zoom 2 times
 		xm = 4.0 * fabs(angle) / 3.141592;
-		if (angle>0.0)
+		if(angle>0.0)
 			x2 /= xm; x1 *= xm;
 		else
 			x2 *= xm; x1 /= xm
 		end
 	end
-	if ( ss != C_NULL && ss[3] =='1' )
+	if( ss != C_NULL && ss[3] =='1' )
 		# LOG10:  one circle will zoom 10 times
 		xm = 10.0 * fabs(angle) / 3.141592;
-		if (angle > 0.0)
+		if(angle > 0.0)
 			x2 /= xm; x1 *= xm
 		else
 			x2 *= xm; x1 /= xm
@@ -752,7 +752,7 @@ function dial1_btnup_cb(self::Ptr{Ihandle}, angle::Cdouble)
 		x2 = xm + (x2 - xm)*(1.0-angle*1.0/3.141592);
 	end
 
-	if (x1 < x2)
+	if(x1 < x2)
 		s = @sprintf("%f", x1)
 		IupSetAttribute(plot[ii], "AXS_YMIN", s);
 		s = @sprintf("%f", x2)

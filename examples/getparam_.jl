@@ -1,5 +1,5 @@
 # IupGetParam: Example
-#  Shows a dialog with all the possible fields. 
+#  Shows a dialog with all the possible fields.
 
 module getparam_
 
@@ -30,7 +30,7 @@ function getparam()
 	IupControlsOpen()   			# so we can show the IupDial, but can be tested without it
 	IupSetLanguage("ENGLISH")
 
-	if (IupGetParam("Title", param_action, 0,
+	if(IupGetParam("Title", param_action, 0,
 	               "Boolean: %b[No,Yes]{Boolean Tip}\n
 	               Integer: %i{Integer Tip}\n
 	               Real 1: %r{Real Tip}\n
@@ -58,24 +58,24 @@ function getparam()
 	          Real 2: %g\n
 	          Angle: %g\n
 	          String: %s\n
-	          List Index: %d\n 
+	          List Index: %d\n
 	          FileName: %s\n
 	          Color: %s\n
 	          Multiline: %s",
 	          pboolean, pinteger, float64(preal), pinteger2, float64(preal2), float64(pangle),
 	          pstring, plist, pfile_name, pcolor, pstring2)
- 
+
 	IupClose()                                  # And close it when ready
 end
 
 function param_action(dialog::Ptr{Ihandle}, param_index::Int, user_data::Ptr{Void})
-	if (param_index == IUP_GETPARAM_OK)
+	if(param_index == IUP_GETPARAM_OK)
 		@printf("OK\n")
-	elseif (param_index == IUP_GETPARAM_INIT)
+	elseif(param_index == IUP_GETPARAM_INIT)
 		@printf("Map\n")
-	elseif (param_index == IUP_GETPARAM_CANCEL)
+	elseif(param_index == IUP_GETPARAM_CANCEL)
 		@printf("Cancel\n")
-	elseif (param_index == IUP_GETPARAM_HELP)
+	elseif(param_index == IUP_GETPARAM_HELP)
 		@printf("Help\n")
 	else
 		param_str = sprintf("PARAM%d", param_index)

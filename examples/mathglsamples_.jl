@@ -1,5 +1,5 @@
 # MathGL samples w/ IupMglPlot
-# Based on: MathGL documentation (v. 1.10), Cap. 9
+# Based on: MathGL documentation(v. 1.10), Cap. 9
 
 module mathglsamples_
 
@@ -26,43 +26,43 @@ include("../src/iupkey_h.jl")
 
 
 global test_list = [
-  {"Plot (Linear 1D)" "SamplePlotLinear1D"},
-  {"Plot (Linear 3D)" "SamplePlotLinear3D"},
-  {"Radar (Linear 1D)" "SampleRadarLinear1D"},
-  {"Area (Linear 1D)" "SampleAreaLinear1D"},
-  {"Bars (Linear 1D)" "SampleBarsLinear1D"},
-  {"Bars (Linear 3D)" "SampleBarsLinear3D"},
-  {"Barh (Linear 1D)" "SampleBarhLinear1D"},
-  {"Step (Linear 1D)" "SampleStepLinear1D"},
-  {"Stem (Linear 1D)" "SampleStemLinear1D"},
-  {"Chart (Linear 1D)" "SampleChartLinear1D"},
-  {"Pie (Linear 1D)" "SamplePieLinear1D"},
-  {"Dots (Linear 3D)" "SampleDotsLinear3D"},
-  {"Crust (Linear 3D)" "SampleCrustLinear3D"},
+  {"Plot(Linear 1D)" "SamplePlotLinear1D"},
+  {"Plot(Linear 3D)" "SamplePlotLinear3D"},
+  {"Radar(Linear 1D)" "SampleRadarLinear1D"},
+  {"Area(Linear 1D)" "SampleAreaLinear1D"},
+  {"Bars(Linear 1D)" "SampleBarsLinear1D"},
+  {"Bars(Linear 3D)" "SampleBarsLinear3D"},
+  {"Barh(Linear 1D)" "SampleBarhLinear1D"},
+  {"Step(Linear 1D)" "SampleStepLinear1D"},
+  {"Stem(Linear 1D)" "SampleStemLinear1D"},
+  {"Chart(Linear 1D)" "SampleChartLinear1D"},
+  {"Pie(Linear 1D)" "SamplePieLinear1D"},
+  {"Dots(Linear 3D)" "SampleDotsLinear3D"},
+  {"Crust(Linear 3D)" "SampleCrustLinear3D"},
   {"----------" "Dummy"},
-  {"Surface (Planar)" "SampleSurfacePlanar"},
-  {"Surface Colors (Planar)" "SampleSurfaceColorsPlanar"},
-  {"Surface Contour (Planar)" "SampleSurfaceContourPlanar"},
-  {"Mesh (Planar)" "SampleMeshPlanar"},
-  {"Fall (Planar)" "SampleFallPlanar"},
-  {"Belt (Planar)" "SampleBeltPlanar"},
-  {"Tile (Planar)" "SampleTilePlanar"},
-  {"Boxes (Planar)" "SampleBoxesPlanar"},
-  {"Density (Planar)" "SampleDensityPlanar"},
-  {"Contour (Planar)" "SampleContourPlanar"},
-  {"Contour Filled (Planar)" "SampleContourFilledPlanar"},
-  {"Axial Contour (Planar)" "SampleAxialContourPlanar"},
-  {"GradientLines (Planar)" "SampleGradientLinesPlanar"},
+  {"Surface(Planar)" "SampleSurfacePlanar"},
+  {"Surface Colors(Planar)" "SampleSurfaceColorsPlanar"},
+  {"Surface Contour(Planar)" "SampleSurfaceContourPlanar"},
+  {"Mesh(Planar)" "SampleMeshPlanar"},
+  {"Fall(Planar)" "SampleFallPlanar"},
+  {"Belt(Planar)" "SampleBeltPlanar"},
+  {"Tile(Planar)" "SampleTilePlanar"},
+  {"Boxes(Planar)" "SampleBoxesPlanar"},
+  {"Density(Planar)" "SampleDensityPlanar"},
+  {"Contour(Planar)" "SampleContourPlanar"},
+  {"Contour Filled(Planar)" "SampleContourFilledPlanar"},
+  {"Axial Contour(Planar)" "SampleAxialContourPlanar"},
+  {"GradientLines(Planar)" "SampleGradientLinesPlanar"},
   {"----------" "Dummy"},
-  {"Iso Surface (Volume)" "SampleIsoSurfaceVolume"},
-  {"CloudCubes (Volume)" "SampleCloudCubesVolume"},
-  {"Cloud (Volume)" "SampleCloudVolume"},
-  {"Density (Volume)" "SampleDensityVolume"},
-  {"Contour (Volume)" "SampleContourVolume"},
-  {"ContourFilled (Volume)" "SampleContourFilledVolume"},
-  {"ContourProject (Volume)" "SampleContourProjectVolume"},
-  {"ContourFilledProject (Volume)" "SampleContourFilledProjectVolume"},
-  {"DensityProject (Volume)" "SampleDensityProjectVolume"},
+  {"Iso Surface(Volume)" "SampleIsoSurfaceVolume"},
+  {"CloudCubes(Volume)" "SampleCloudCubesVolume"},
+  {"Cloud(Volume)" "SampleCloudVolume"},
+  {"Density(Volume)" "SampleDensityVolume"},
+  {"Contour(Volume)" "SampleContourVolume"},
+  {"ContourFilled(Volume)" "SampleContourFilledVolume"},
+  {"ContourProject(Volume)" "SampleContourProjectVolume"},
+  {"ContourFilledProject(Volume)" "SampleContourFilledProjectVolume"},
+  {"DensityProject(Volume)" "SampleDensityProjectVolume"},
   {"----------" "Dummy"},
   {"Text Styles" "SampleText"},
   {"Legend" "SampleLegend"},
@@ -71,85 +71,85 @@ global test_list = [
 
 # ----------------------------------------------------------------------------------
 # Since there is no feval in Julia just simulate it here for the current need
-# THIS IS A VERY DUMB THING TO DO AND WILL BE REPLACED WITH A CLEVER SOLUTION (WHEN I KNOW HOW)
+# THIS IS A VERY DUMB THING TO DO AND WILL BE REPLACED WITH A CLEVER SOLUTION(WHEN I KNOW HOW)
 function feval(func::String)
-	if (func == "SamplePlotLinear1D")
+	if(func == "SamplePlotLinear1D")
 		SamplePlotLinear1D()
-	elseif (func == "SamplePlotLinear3D")
+	elseif(func == "SamplePlotLinear3D")
 		SamplePlotLinear3D()
-	elseif (func == "SampleRadarLinear1D")
+	elseif(func == "SampleRadarLinear1D")
 		SampleRadarLinear1D()
-	elseif (func == "SampleAreaLinear1D")
+	elseif(func == "SampleAreaLinear1D")
 		SampleAreaLinear1D()
-	elseif (func == "SampleBarsLinear1D")
+	elseif(func == "SampleBarsLinear1D")
 		SampleBarsLinear1D()
-	elseif (func == "SampleBarsLinear3D")
+	elseif(func == "SampleBarsLinear3D")
 		SampleBarsLinear3D()
-	elseif (func == "SampleBarhLinear1D")
+	elseif(func == "SampleBarhLinear1D")
 		SampleBarhLinear1D()
-	elseif (func == "SampleStepLinear1D")
+	elseif(func == "SampleStepLinear1D")
 		SampleStepLinear1D()
-	elseif (func == "SampleStemLinear1D")
+	elseif(func == "SampleStemLinear1D")
 		SampleStemLinear1D()
-	elseif (func == "SampleChartLinear1D")
+	elseif(func == "SampleChartLinear1D")
 		SampleChartLinear1D()
-	elseif (func == "SamplePieLinear1D")
+	elseif(func == "SamplePieLinear1D")
 		SamplePieLinear1D()
-	elseif (func == "SampleDotsLinear3D")
+	elseif(func == "SampleDotsLinear3D")
 		SampleDotsLinear3D()
-	elseif (func == "SampleCrustLinear3D")
+	elseif(func == "SampleCrustLinear3D")
 		SampleCrustLinear3D()
-	elseif (func == "SampleSurfacePlanar")
+	elseif(func == "SampleSurfacePlanar")
 		SampleSurfacePlanar()
-	elseif (func == "SampleSurfaceColorsPlanar")
+	elseif(func == "SampleSurfaceColorsPlanar")
 		SampleSurfaceColorsPlanar()
-	elseif (func == "SampleSurfaceContourPlanar")
+	elseif(func == "SampleSurfaceContourPlanar")
 		SampleSurfaceContourPlanar()
-	elseif (func == "SampleMeshPlanar")
+	elseif(func == "SampleMeshPlanar")
 		SampleMeshPlanar()
-	elseif (func == "SampleFallPlanar")
+	elseif(func == "SampleFallPlanar")
 		SampleFallPlanar()
-	elseif (func == "SampleBeltPlanar")
+	elseif(func == "SampleBeltPlanar")
 		SampleBeltPlanar()
-	elseif (func == "SampleTilePlanar")
+	elseif(func == "SampleTilePlanar")
 		SampleTilePlanar()
-	elseif (func == "SampleBoxesPlanar")
+	elseif(func == "SampleBoxesPlanar")
 		SampleBoxesPlanar()
-	elseif (func == "SampleDensityPlanar")
+	elseif(func == "SampleDensityPlanar")
 		SampleDensityPlanar()
-	elseif (func == "SampleContourPlanar")
+	elseif(func == "SampleContourPlanar")
 		SampleContourPlanar()
-	elseif (func == "SampleContourFilledPlanar")
+	elseif(func == "SampleContourFilledPlanar")
 		SampleContourFilledPlanar()
-	elseif (func == "SampleAxialContourPlanar")
+	elseif(func == "SampleAxialContourPlanar")
 		SampleAxialContourPlanar()
-	elseif (func == "SampleGradientLinesPlanar")
+	elseif(func == "SampleGradientLinesPlanar")
 		SampleGradientLinesPlanar()
-	elseif (func == "SampleIsoSurfaceVolume")
+	elseif(func == "SampleIsoSurfaceVolume")
 		SampleIsoSurfaceVolume()
-	elseif (func == "SampleCloudCubesVolume")
+	elseif(func == "SampleCloudCubesVolume")
 		SampleCloudCubesVolume()
-	elseif (func == "SampleCloudVolume")
+	elseif(func == "SampleCloudVolume")
 		SampleCloudVolume()
-	elseif (func == "SampleDensityVolume")
+	elseif(func == "SampleDensityVolume")
 		SampleDensityVolume()
-	elseif (func == "SampleContourVolume")
+	elseif(func == "SampleContourVolume")
 		SampleContourVolume()
-	elseif (func == "SampleContourFilledVolume")
+	elseif(func == "SampleContourFilledVolume")
 		SampleContourFilledVolume()
-	elseif (func == "SampleContourProjectVolume")
+	elseif(func == "SampleContourProjectVolume")
 		SampleContourProjectVolume()
-	elseif (func == "SampleContourFilledProjectVolume")
+	elseif(func == "SampleContourFilledProjectVolume")
 		SampleContourFilledProjectVolume()
-	elseif (func == "SampleDensityProjectVolume")
+	elseif(func == "SampleDensityProjectVolume")
 		SampleDensityProjectVolume()
-	elseif (func == "SampleText")
+	elseif(func == "SampleText")
 		SampleText()
-	elseif (func == "SampleLegend")
+	elseif(func == "SampleLegend")
 		SampleLegend()
-	elseif (func == "SampleSemiLog")
+	elseif(func == "SampleSemiLog")
 		SampleSemiLog()
-	elseif (func == "SampleLogLog")
+	elseif(func == "SampleLogLog")
 		SampleLogLog()
 	end
 end
@@ -189,7 +189,7 @@ function mathglsamples()
 	IupSetAttribute(list, "VISIBLECOLUMNS", "15")
 	IupSetCallback(list, "ACTION", cfunction(action_cb, Int, (Ptr{Ihandle}, Ptr{Uint8}, Int, Int)))
 
-	for (i = 1:count)
+	for(i = 1:count)
 		str = @sprintf("%d", i)
 		IupSetAttribute(list, str, test_list[i,1])
 	end
@@ -200,7 +200,7 @@ function mathglsamples()
 
 	IupSetAttribute(plot, "RASTERSIZE")         # Clear initial size
 
-	ChangePlot(1)                               # Initialize the plot (run first example)
+	ChangePlot(1)                               # Initialize the plot(run first example)
 	IupMainLoop()                               # Initializes IUP main loop
 	IupClose()                                  # And close it when ready
 end
@@ -303,20 +303,20 @@ function controlPanel()
 	bt4 = IupButton("Save RGB");
 	#IupSetCallback(bt4, "ACTION", cfunction(bt4_cb, Int, (Ptr{Ihandle}, Int)))
 
-	vbox1 = IupFrame(IupVbox(f1, 
-	                       f2, 
-	                       grid_tgg, 
-	                       box_tgg, 
-	                       legend_tgg, 
-	                       lbl3, 
-	                       transp_tgg, 
+	vbox1 = IupFrame(IupVbox(f1,
+	                       f2,
+	                       grid_tgg,
+	                       box_tgg,
+	                       legend_tgg,
+	                       lbl3,
+	                       transp_tgg,
 	                       light_tgg
 	                       ))
 	IupSetAttribute(vbox1, "GAP", "4");
 	IupSetAttribute(vbox1, "MARGIN", "5x5");
 
 	vbox2 = IupVbox(aa_tgg, opengl_tgg, lbl4,
-	                IupVbox(bt1, bt2, bt3, bt4), 
+	                IupVbox(bt1, bt2, bt3, bt4),
 	               )
 	IupSetAttribute(vbox2, "GAP", "4");
 	IupSetAttribute(vbox2, "MARGIN", "5x0");
@@ -380,7 +380,7 @@ function UpdateFlags()
 	global box_tgg, aa_tgg, transp_tgg, light_tgg, opengl_tgg
 
 	# auto scaling Y axis
-	if (IupGetInt(plot, "AXS_YAUTOMIN") != 0 && IupGetInt(plot, "AXS_YAUTOMAX") != 0)
+	if(IupGetInt(plot, "AXS_YAUTOMIN") != 0 && IupGetInt(plot, "AXS_YAUTOMAX") != 0)
 		IupSetAttribute(autoscaleY_tgg, "VALUE", "ON")
 		IupSetAttribute(minmaxY_dial, "ACTIVE", "NO")
 	else
@@ -389,7 +389,7 @@ function UpdateFlags()
 	end
 
 	# auto scaling X axis
-	if (IupGetInt(plot, "AXS_XAUTOMIN") != 0 && IupGetInt(plot, "AXS_XAUTOMAX") != 0)
+	if(IupGetInt(plot, "AXS_XAUTOMIN") != 0 && IupGetInt(plot, "AXS_XAUTOMAX") != 0)
 		IupSetAttribute(autoscaleX_tgg, "VALUE", "ON")
 		IupSetAttribute(minmaxX_dial, "ACTIVE", "NO")
 	else
@@ -399,49 +399,49 @@ function UpdateFlags()
 
 	# grid
 	value = IupGetAttribute(plot, "GRID")
-	if (value != 0 && search(bytestring(value), "XYZ") != 0)
+	if(value != 0 && search(bytestring(value), "XYZ") != 0)
 		IupSetAttribute(grid_tgg, "VALUE", "ON")
 	else
 		IupSetAttribute(grid_tgg, "VALUE", "OFF")
 	end
 
 	# legend */
-	if (IupGetInt(plot, "LEGEND") != 0)
+	if(IupGetInt(plot, "LEGEND") != 0)
 		IupSetAttribute(legend_tgg, "VALUE", "ON")
 	else
 		IupSetAttribute(legend_tgg, "VALUE", "OFF")
 	end
 
 	# box
-	if (IupGetInt(plot, "BOX") != 0)
+	if(IupGetInt(plot, "BOX") != 0)
 		IupSetAttribute(box_tgg, "VALUE", "ON")
 	else
 		IupSetAttribute(box_tgg, "VALUE", "OFF")
 	end
 
 	# antialias
-	if (IupGetInt(plot, "ANTIALIAS") != 0)
+	if(IupGetInt(plot, "ANTIALIAS") != 0)
 		IupSetAttribute(aa_tgg, "VALUE", "ON");
 	else
 		IupSetAttribute(aa_tgg, "VALUE", "OFF")
 	end
 
 	# transparent
-	if (IupGetInt(plot, "TRANSPARENT") != 0)
+	if(IupGetInt(plot, "TRANSPARENT") != 0)
 		IupSetAttribute(transp_tgg, "VALUE", "ON")
 	else
 		IupSetAttribute(transp_tgg, "VALUE", "OFF")
 	end
 
 	# light
-	if (IupGetInt(plot, "LIGHT") != 0)
+	if(IupGetInt(plot, "LIGHT") != 0)
 		IupSetAttribute(light_tgg, "VALUE", "ON")
 	else
 		IupSetAttribute(light_tgg, "VALUE", "OFF")
 	end
 
 	# opengl
-	if (IupGetInt(plot, "OPENGL") != 0)
+	if(IupGetInt(plot, "OPENGL") != 0)
 		IupSetAttribute(opengl_tgg, "VALUE", "ON")
 	else
 		IupSetAttribute(opengl_tgg, "VALUE", "OFF")
@@ -453,7 +453,7 @@ end
 function autoscaleY_tgg_cb(self::Ptr{Ihandle}, v::Int)
 	global plot, minmaxY_dial
 
-	if (v != 0)
+	if(v != 0)
 		IupSetAttribute(minmaxY_dial, "ACTIVE", "NO")
 		IupSetAttribute(plot, "AXS_YAUTOMIN", "YES")
 		IupSetAttribute(plot, "AXS_YAUTOMAX", "YES")
@@ -472,7 +472,7 @@ end
 function autoscaleX_tgg_cb(self::Ptr{Ihandle}, v::Int)
 	global plot, minmaxX_dial
 
-	if (v != 0)
+	if(v != 0)
 		IupSetAttribute(minmaxX_dial, "ACTIVE", "NO")
 		IupSetAttribute(plot, "AXS_XAUTOMIN", "YES")
 		IupSetAttribute(plot, "AXS_XAUTOMAX", "YES")
@@ -503,7 +503,7 @@ end
 # --------------------------------------------------------------------------------------
 function k_enter_cb(ih::Ptr{Ihandle})
 	pos = IupGetInt(ih, "VALUE")
-	if (pos > 0)
+	if(pos > 0)
 		ChangePlot(pos)
 	end
 	return IUP_DEFAULT
@@ -511,7 +511,7 @@ end
 
 # --------------------------------------------------------------------------------------
 function action_cb(ih::Ptr{Ihandle}, text::Ptr{Uint8}, item::Int, state::Int)
-	if (state == 1)
+	if(state == 1)
 		ChangePlot(item)
 	end
 	return IUP_DEFAULT
@@ -540,21 +540,21 @@ function minmaxY_dial_btnup_cb(self::Ptr{Ihandle}, angle::Float64)
 	x2 = IupGetFloat(plot, "OLD_YMAX")
 
 	ss = IupGetAttribute(plot, "AXS_YMODE")
-	if (ss != C_NULL)			# Otherwise bytestring barfs
+	if(ss != C_NULL)			# Otherwise bytestring barfs
 		ss = bytestring(ss)
 	end
-	if (ss != C_NULL && ss[3] == '2')		# LOG2:  one circle will zoom 2 times */
+	if(ss != C_NULL && ss[3] == '2')		# LOG2:  one circle will zoom 2 times */
 		xm = 4.0 * fabs(angle) / 3.141592
-		if (angle > 0.0)
+		if(angle > 0.0)
 			x2 /= xm; x1 *= xm
 		else
 			x2 *= xm; x1 /= xm
 		end
 	end
 
-	if (ss != C_NULL && ss[3] == '1')		# LOG10:  one circle will zoom 10 times
+	if(ss != C_NULL && ss[3] == '1')		# LOG10:  one circle will zoom 10 times
 		xm = 10.0 * fabs(angle) / 3.141592
-		if (angle > 0.0)
+		if(angle > 0.0)
 			x2 /= xm; x1 *= xm
 		else
 			x2 *= xm; x1 /= xm
@@ -565,7 +565,7 @@ function minmaxY_dial_btnup_cb(self::Ptr{Ihandle}, angle::Float64)
 		x2 = xm + (x2 - xm)*(1.0-angle*1.0/3.141592);
 	end
 
-	if (x1 < x2)
+	if(x1 < x2)
 		IupSetFloat(plot, "AXS_YMIN", x1)
 		IupSetFloat(plot, "AXS_YMAX", x2)
 	end
@@ -608,7 +608,7 @@ end
 function grid_tgg_cb(self::Ptr{Ihandle}, v::Int)
 	global plot
 
-	if (v != 0)
+	if(v != 0)
 		IupSetAttribute(plot, "GRID", "YES")
 	else
 		IupSetAttribute(plot, "GRID", "NO")
@@ -623,7 +623,7 @@ end
 function legend_tgg_cb(self::Ptr{Ihandle}, v::Int)
 	global plot
 
-	if (v != 0)
+	if(v != 0)
 		IupSetAttribute(plot, "LEGEND", "YES")
 	else
 		IupSetAttribute(plot, "LEGEND", "NO")
@@ -638,7 +638,7 @@ end
 function box_tgg_cb(self::Ptr{Ihandle}, v::Int)
 	global plot
 
-	if (v != 0)
+	if(v != 0)
 		IupSetAttribute(plot, "BOX", "YES")
 	else
 		IupSetAttribute(plot, "BOX", "NO")
@@ -653,7 +653,7 @@ end
 function aa_tgg_cb(self::Ptr{Ihandle}, v::Int)
 	global plot
 
-	if (v != 0)
+	if(v != 0)
 		IupSetAttribute(plot, "ANTIALIAS", "YES");
 	else
 		IupSetAttribute(plot, "ANTIALIAS", "NO")
@@ -668,7 +668,7 @@ end
 function transp_tgg_cb(self::Ptr{Ihandle}, v::Int)
 	global plot
 
-	if (v != 0)
+	if(v != 0)
 		IupSetAttribute(plot, "TRANSPARENT", "YES");
 	else
 		IupSetAttribute(plot, "TRANSPARENT", "NO")
@@ -684,7 +684,7 @@ end
 function light_tgg_cb(self::Ptr{Ihandle}, v::Int)
 	global plot
 
-	if (v != 0)
+	if(v != 0)
 		IupSetAttribute(plot, "LIGHT", "YES")
 	else
 		IupSetAttribute(plot, "LIGHT", "NO")
@@ -699,7 +699,7 @@ end
 function opengl_tgg_cb(self::Ptr{Ihandle}, v::Int)
 	global plot, aa_tgg
 
-	if (v != 0)
+	if(v != 0)
 		IupSetAttribute(plot, "OPENGL", "YES")
 	else
 		IupSetAttribute(aa_tgg, "VALUE", "OFF")
@@ -1244,7 +1244,7 @@ function SamplePlotLinear1D()
 
 	IupMglPlotNewDataSet(plot, 1);
 	IupMglPlotSetFromFormula(plot, 1, "sin(2*pi*x)", 50, 1, 1);
-  
+
 	IupMglPlotNewDataSet(plot, 1);
 	IupMglPlotSetFromFormula(plot, 2, "cos(2*pi*x)", 50, 1, 1);
 

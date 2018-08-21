@@ -5,7 +5,7 @@
   Usage: im_view <file_name>
 
 	Example: im_view test.tif
-	
+
   Click on image to open another file.
 
 #include <iup.h>
@@ -57,7 +57,7 @@ function im_view()
 	IupShow(dlg);
 
 	file_name = "*.*"
-	if (IupGetFile(file_name) == 0)
+	if(IupGetFile(file_name) == 0)
 		ShowImage(file_name, dlg)
 	end
 
@@ -69,17 +69,17 @@ end
 
 # --------------------------------------------------------------------------------
 function PrintError(error::Integer)
-	if (error == IM_ERR_OPEN)
+	if(error == IM_ERR_OPEN)
 		IupMessage("IM", "Error Opening File.")
-	elseif (error == IM_ERR_MEM)
+	elseif(error == IM_ERR_MEM)
 		IupMessage("IM", "Insuficient memory.")
-	elseif (error == IM_ERR_ACCESS)
+	elseif(error == IM_ERR_ACCESS)
 		IupMessage("IM", "Error Accessing File.")
-	elseif (error == IM_ERR_DATA)
+	elseif(error == IM_ERR_DATA)
 		IupMessage("IM", "Image type not Suported.")
-	elseif (error == IM_ERR_FORMAT)
+	elseif(error == IM_ERR_FORMAT)
 		IupMessage("IM", "Invalid Format.")
-	elseif (error == IM_ERR_COMPRESS)
+	elseif(error == IM_ERR_COMPRESS)
 		IupMessage("IM", "Invalid or unsupported compression.")
 	else
 		IupMessage("IM", "Unknown Error.")
@@ -92,7 +92,7 @@ function cbCanvasRepaint(iup_canvas::Ptr{Ihandle})
 
 	cd_canvas = convert(Ptr{cdCanvas}, IupGetAttribute(iup_canvas, "cdCanvas"))
 
-	if (cd_canvas == C_NULL || disable_repaint)
+	if(cd_canvas == C_NULL || disable_repaint)
 		return IUP_DEFAULT
 	end
 
@@ -100,7 +100,7 @@ function cbCanvasRepaint(iup_canvas::Ptr{Ihandle})
 	cdCanvasClear(cd_canvas);
 
 	image = convert(Ptr{imImage}, IupGetAttribute(iup_canvas, "imImage"))
-	if (image == C_NULL)
+	if(image == C_NULL)
 		return IUP_DEFAULT
 	end
 
@@ -123,7 +123,7 @@ end
 function ShowImage(file_name::String, iup_dialog::Ptr{Ihandle})
 	image = IupGetAttribute(iup_dialog, "imImage")		# typeof(image) => Ptr{Uint8}
 	image = convert(Ptr{imImage}, image)		# If I use Ptr{imImage} it Booms???
-	if (image != C_NULL)
+	if(image != C_NULL)
 		imImageDestroy(image)
 	end
 	IupSetAttribute(iup_dialog, "imImage")
@@ -131,8 +131,8 @@ function ShowImage(file_name::String, iup_dialog::Ptr{Ihandle})
 	error = pointer([0])
 	image = imFileImageLoadBitmap(file_name, 0, error)
 	error = unsafe_load(error)
-	if (error != 0)	PrintError(error)	end
-	if (image == C_NULL) return end
+	if(error != 0)	PrintError(error)	end
+	if(image == C_NULL) return end
 
 	IupSetAttribute(iup_dialog, "imImage", image);
 	IupStoreAttribute(iup_dialog, "TITLE", file_name);
@@ -145,12 +145,12 @@ function cbCanvasButton(iup_canvas::Ptr{Ihandle}, but::Int, pressed::Int)
 	global disable_repaint
 
 	file_name = "*.*"
-	if (but != IUP_BUTTON1 || pressed != 0)
+	if(but != IUP_BUTTON1 || pressed != 0)
 		return IUP_DEFAULT
 	end
 
 	disable_repaint = true
-	if (IupGetFile(file_name) != 0)
+	if(IupGetFile(file_name) != 0)
 		disable_repaint = false
 		return IUP_DEFAULT
 	end
@@ -172,8 +172,8 @@ function cbDialogClose(iup_dialog::Ptr{Ihandle})
 	cd_canvas = convert(Ptr{cdCanvas}, IupGetAttribute(iup_dialog, "cdCanvas"))
 	image = convert(Ptr{imImage}, IupGetAttribute(iup_dialog, "imImage"))
 
-	if (cd_canvas != C_NULL) cdKillCanvas(cd_canvas)	end
-	if (image != C_NULL) imImageDestroy(image)		end
+	if(cd_canvas != C_NULL) cdKillCanvas(cd_canvas)	end
+	if(image != C_NULL) imImageDestroy(image)		end
 
 	IupSetAttribute(iup_dialog, "cdCanvas")
 	IupSetAttribute(iup_dialog, "imImage")
@@ -198,9 +198,9 @@ end
 
 # ---------------------------------------------------------------------------------------------
 function CreateMainMenu()
-	item_help = IupItem ("Help", "item_help_act")
-	menu_help  = IupMenu (item_help);
-	submenu_help  = IupSubmenu ("Help", menu_help)
+	item_help = IupItem("Help", "item_help_act")
+	menu_help  = IupMenu(item_help);
+	submenu_help  = IupSubmenu("Help", menu_help)
 
 	# Creates main menu with file menu
 	mainMenu = IupMenu(submenu_help)
@@ -230,7 +230,7 @@ function imlabCreateButtonImages()
 		,2,2,2,0,0,0,0,0,0,0,0,0,0,0,0,2
 	]
 
-	new_colors = [                                      
+	new_colors = [
 		"0 0 0",
 		"132 132 132",
 		"BGCOLOR",
@@ -280,12 +280,12 @@ function CreateButtonImage(w::Int, h::Int, bits, colors, name::String)
 	iup_image = IupImage(w, h, bits)
 	IupSetHandle(name, iup_image)
 
-	while (colors[i] != "")
-		if (i > 16)
+	while(colors[i] != "")
+		if(i > 16)
 			aux_color_str = @sprintf("%d", i)
-			IupStoreAttribute(iup_image, aux_color_str, colors[i]); 
+			IupStoreAttribute(iup_image, aux_color_str, colors[i]);
 		else
-			IupStoreAttribute(iup_image, color_str[i], colors[i]); 
+			IupStoreAttribute(iup_image, color_str[i], colors[i]);
 		end
 		i += 1
 	end
