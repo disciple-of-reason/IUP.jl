@@ -69,5 +69,9 @@ include("libiup_h.jl")
 include("libiup.jl")
 include("iupcontrols.jl")
 include("iup_plot.jl")
+include("IM.jl")
+include("CD.jl")
 
+export IM
+export CD
 end  # module

@@ -27,7 +27,7 @@ function dialog1()
 
 	# Creating dialog's content
 	quit_bt = IupButton("Quit")
-	IupSetCallback(quit_bt, "ACTION", cfunction(quit_cb, Int, (),))
+	IupSetCallback(quit_bt, "ACTION", quit_cb)
 	IupSetHandle("quit", quit_bt)
 
 	# Creating dialog's menu
@@ -51,13 +51,15 @@ function dialog1()
 	IupClose()                                  # And close it when ready
 end
 
-function quit_cb()
+function quit_fn()
 	return IUP_CLOSE
 end
 
+quit_cb = @cfunction(quit_fn, Int, (),)
+
 # defines icon's image
 function icon_img()
-	img = uint8([
+	img = map(UInt8, [
 	1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,
 	1,3,3,3,3,3,3,3,3,3,3,3,3,3,3,3,3,3,3,3,3,3,3,3,3,3,3,3,3,3,3,2,
 	1,3,5,5,5,5,5,5,5,5,5,5,5,5,5,5,5,5,5,5,5,5,5,5,5,5,5,5,5,5,4,2,

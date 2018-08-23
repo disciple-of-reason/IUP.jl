@@ -91,60 +91,60 @@ const CD_DEG2RAD = 0.01745329252
 # Skipping MacroDefinition: cdPutImageRGBA(iw,ih,r,g,b,a,x,y,w,h)cdPutImageRectRGBA((iw),(ih),(r),(g),(b),(a),(x),(y),(w),(h),0,0,0,0)
 # Skipping MacroDefinition: cdPutImageMap(iw,ih,index,colors,x,y,w,h)cdPutImageRectMap((iw),(ih),(index),(colors),(x),(y),(w),(h),0,0,0,0)
 # Skipping MacroDefinition: cdPutImage(image,x,y)cdPutImageRect((image),(x),(y),0,0,0,0)
-# Skipping MacroDefinition: cdCanvas2Raster(x,y){(void)x;cdUpdateYAxis(y);}
-#		typealias va_list __builtin_va_list
+# Skipping MacroDefinition: cdCanvas2Raster(x,y){(Nothing)x;cdUpdateYAxis(y);}
+#		va_list = __builtin_va_list
 
-type cdCtxCanvasBase
+mutable struct cdCtxCanvasBase
     canvas::Ptr{Cint}
 end
 
-type cdPoint
+mutable struct cdPoint
     x::Cint
     y::Cint
 end
-type cdfPoint
+mutable struct cdfPoint
     x::Cdouble
     y::Cdouble
 end
-type cdRect
+mutable struct cdRect
     xmin::Cint
     xmax::Cint
     ymin::Cint
     ymax::Cint
 end
-type cdfRect
+mutable struct cdfRect
     xmin::Cdouble
     xmax::Cdouble
     ymin::Cdouble
     ymax::Cdouble
 end
-type cdAttribute
+mutable struct cdAttribute
     name::Ptr{UInt8}
-    set::Ptr{Void}
-    get::Ptr{Void}
+    set::Ptr{Nothing}
+    get::Ptr{Nothing}
 end
-type cdImage
+mutable struct cdImage
     w::Cint
     h::Cint
-    ctximage::Ptr{Void}
-    cxGetImage::Ptr{Void}
-    cxPutImageRect::Ptr{Void}
-    cxKillImage::Ptr{Void}
+    ctximage::Ptr{Nothing}
+    cxGetImage::Ptr{Nothing}
+    cxPutImageRect::Ptr{Nothing}
+    cxKillImage::Ptr{Nothing}
 end
-type cdContext
+mutable struct cdContext
     caps::Culong
     _type::Cint
-    cxCreateCanvas::Ptr{Void}
-    cxInitTable::Ptr{Void}
-    cxPlay::Ptr{Void}
-    cxRegisterCallback::Ptr{Void}
+    cxCreateCanvas::Ptr{Nothing}
+    cxInitTable::Ptr{Nothing}
+    cxPlay::Ptr{Nothing}
+    cxRegisterCallback::Ptr{Nothing}
 end
 
-immutable Array_2_UInt8
+struct Array_2_UInt8
     d1::UInt8
     d2::UInt8
 end
-immutable Array_6_Cdouble
+struct Array_6_Cdouble
     d1::Cdouble
     d2::Cdouble
     d3::Cdouble
@@ -152,7 +152,7 @@ immutable Array_6_Cdouble
     d5::Cdouble
     d6::Cdouble
 end
-immutable Array_1024_UInt8
+struct Array_1024_UInt8
     d1::UInt8
     d2::UInt8
     d3::UInt8
@@ -1179,7 +1179,7 @@ immutable Array_1024_UInt8
     d1024::UInt8
 end
 
-immutable Array_50_Ptr
+struct Array_50_Ptr
     d1::Ptr{cdAttribute}
     d2::Ptr{cdAttribute}
     d3::Ptr{cdAttribute}
@@ -1232,66 +1232,66 @@ immutable Array_50_Ptr
     d50::Ptr{cdAttribute}
 end
 
-type cdCanvas
+mutable struct cdCanvas
     signature::Array_2_UInt8
-    cxPixel::Ptr{Void}
-    cxLine::Ptr{Void}
-    cxPoly::Ptr{Void}
-    cxRect::Ptr{Void}
-    cxBox::Ptr{Void}
-    cxArc::Ptr{Void}
-    cxSector::Ptr{Void}
-    cxChord::Ptr{Void}
-    cxText::Ptr{Void}
-    cxKillCanvas::Ptr{Void}
-    cxFont::Ptr{Void}
-    cxPutImageRectMap::Ptr{Void}
-    cxPutImageRectRGB::Ptr{Void}
-    cxGetFontDim::Ptr{Void}
-    cxGetTextSize::Ptr{Void}
-    cxFlush::Ptr{Void}
-    cxClear::Ptr{Void}
-    cxFLine::Ptr{Void}
-    cxFPoly::Ptr{Void}
-    cxFRect::Ptr{Void}
-    cxFBox::Ptr{Void}
-    cxFArc::Ptr{Void}
-    cxFSector::Ptr{Void}
-    cxFChord::Ptr{Void}
-    cxFText::Ptr{Void}
-    cxClip::Ptr{Void}
-    cxClipArea::Ptr{Void}
-    cxFClipArea::Ptr{Void}
-    cxBackOpacity::Ptr{Void}
-    cxWriteMode::Ptr{Void}
-    cxLineStyle::Ptr{Void}
-    cxLineWidth::Ptr{Void}
-    cxLineJoin::Ptr{Void}
-    cxLineCap::Ptr{Void}
-    cxInteriorStyle::Ptr{Void}
-    cxHatch::Ptr{Void}
-    cxStipple::Ptr{Void}
-    cxPattern::Ptr{Void}
-    cxNativeFont::Ptr{Void}
-    cxTextAlignment::Ptr{Void}
-    cxTextOrientation::Ptr{Void}
-    cxPalette::Ptr{Void}
-    cxBackground::Ptr{Void}
-    cxForeground::Ptr{Void}
-    cxTransform::Ptr{Void}
-    cxPutImageRectRGBA::Ptr{Void}
-    cxGetImageRGB::Ptr{Void}
-    cxScrollArea::Ptr{Void}
-    cxCreateImage::Ptr{Void}
-    cxKillImage::Ptr{Void}
-    cxGetImage::Ptr{Void}
-    cxPutImageRect::Ptr{Void}
-    cxNewRegion::Ptr{Void}
-    cxIsPointInRegion::Ptr{Void}
-    cxOffsetRegion::Ptr{Void}
-    cxGetRegionBox::Ptr{Void}
-    cxActivate::Ptr{Void}
-    cxDeactivate::Ptr{Void}
+    cxPixel::Ptr{Nothing}
+    cxLine::Ptr{Nothing}
+    cxPoly::Ptr{Nothing}
+    cxRect::Ptr{Nothing}
+    cxBox::Ptr{Nothing}
+    cxArc::Ptr{Nothing}
+    cxSector::Ptr{Nothing}
+    cxChord::Ptr{Nothing}
+    cxText::Ptr{Nothing}
+    cxKillCanvas::Ptr{Nothing}
+    cxFont::Ptr{Nothing}
+    cxPutImageRectMap::Ptr{Nothing}
+    cxPutImageRectRGB::Ptr{Nothing}
+    cxGetFontDim::Ptr{Nothing}
+    cxGetTextSize::Ptr{Nothing}
+    cxFlush::Ptr{Nothing}
+    cxClear::Ptr{Nothing}
+    cxFLine::Ptr{Nothing}
+    cxFPoly::Ptr{Nothing}
+    cxFRect::Ptr{Nothing}
+    cxFBox::Ptr{Nothing}
+    cxFArc::Ptr{Nothing}
+    cxFSector::Ptr{Nothing}
+    cxFChord::Ptr{Nothing}
+    cxFText::Ptr{Nothing}
+    cxClip::Ptr{Nothing}
+    cxClipArea::Ptr{Nothing}
+    cxFClipArea::Ptr{Nothing}
+    cxBackOpacity::Ptr{Nothing}
+    cxWriteMode::Ptr{Nothing}
+    cxLineStyle::Ptr{Nothing}
+    cxLineWidth::Ptr{Nothing}
+    cxLineJoin::Ptr{Nothing}
+    cxLineCap::Ptr{Nothing}
+    cxInteriorStyle::Ptr{Nothing}
+    cxHatch::Ptr{Nothing}
+    cxStipple::Ptr{Nothing}
+    cxPattern::Ptr{Nothing}
+    cxNativeFont::Ptr{Nothing}
+    cxTextAlignment::Ptr{Nothing}
+    cxTextOrientation::Ptr{Nothing}
+    cxPalette::Ptr{Nothing}
+    cxBackground::Ptr{Nothing}
+    cxForeground::Ptr{Nothing}
+    cxTransform::Ptr{Nothing}
+    cxPutImageRectRGBA::Ptr{Nothing}
+    cxGetImageRGB::Ptr{Nothing}
+    cxScrollArea::Ptr{Nothing}
+    cxCreateImage::Ptr{Nothing}
+    cxKillImage::Ptr{Nothing}
+    cxGetImage::Ptr{Nothing}
+    cxPutImageRect::Ptr{Nothing}
+    cxNewRegion::Ptr{Nothing}
+    cxIsPointInRegion::Ptr{Nothing}
+    cxOffsetRegion::Ptr{Nothing}
+    cxGetRegionBox::Ptr{Nothing}
+    cxActivate::Ptr{Nothing}
+    cxDeactivate::Ptr{Nothing}
     w::Cint
     h::Cint
     w_mm::Cdouble
@@ -1363,9 +1363,9 @@ type cdCanvas
     viewport::cdRect
     attrib_list::Array_50_Ptr
     attrib_n::Cint
-    vector_font::Ptr{Void}
-    simulation::Ptr{Void}
-    ctxcanvas::Ptr{Void}
+    vector_font::Ptr{Nothing}
+    simulation::Ptr{Nothing}
+    ctxcanvas::Ptr{Nothing}
     context::Ptr{Cint}
 end
 
@@ -1383,14 +1383,14 @@ const CD_CTXPLUS_PRINTER = 3
 const CD_CTXPLUS_EMF = 4
 const CD_CTXPLUS_CLIPBOARD = 5
 # end enum ANONYMOUS_2
-type cdBitmap
+mutable struct cdBitmap
     w::Cint
     h::Cint
     _type::Cint
-    data::Ptr{Void}
+    data::Ptr{Nothing}
 end
 
-typealias cdCallback Ptr{Void}
+cdCallback = Ptr{Nothing}
 # begin enum ANONYMOUS_3
 const CD_RGB = 0
 const CD_MAP = 1
@@ -1534,7 +1534,7 @@ const CD_CTX_DEVICE = 1
 const CD_CTX_IMAGE = 2
 const CD_CTX_FILE = 3
 # end enum ANONYMOUS_23
-typealias cdSizeCB Ptr{Void}
+cdSizeCB = Ptr{Nothing}
 # begin enum ANONYMOUS_24
 const CD_A0 = 0
 const CD_A1 = 1

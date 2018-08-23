@@ -4,21 +4,22 @@
 include("libiup_h.jl")
 include("libiup.jl")
 
-type Handles
+mutable struct Handles
 	figure1::Ptr{Ihandle}
 	iup_canvas::Ptr{Ihandle}
 	cd_canvas::Ptr{cdCanvas}	# cdCanvas is a composite type
 end
 
 ### Garbage collection [prevention]
-const gc_preserve = ObjectIdDict() # reference counted closures
-function gc_ref(x::ANY)
+
+const gc_preserve = IdDict() # reference counted closures;
+function gc_ref(x::Any)
 	global gc_preserve
 	#isbits(x) && error("can't gc-preserve an isbits object")
 	gc_preserve[x] = (get(gc_preserve, x, 0)::Int)+1
 	x
 end
-function gc_unref(x::ANY)
+function gc_unref(x::Any)
 	global gc_preserve
 	#@assert !isbits(x)
 	count = get(gc_preserve, x, 0)::Int-1
@@ -44,7 +45,7 @@ end
 # -------------------------------------------------------------------------------
 function setappdata(hand::Ptr{Ihandle}, name::String, val)
 	# Store the pointer of the whatever in 'val' in a container names 'name'
-	IupSetAttribute(hand, name, pointer_from_objref(val))	
+	IupSetAttribute(hand, name, pointer_from_objref(val))
 end
 
 # -------------------------------------------------------------------------------
@@ -113,7 +114,7 @@ end
 
 # -------------------------------------------------------------------------------
 function get_current_character(canvas::Ptr{Ihandle})
-	# Get the last key pressed. We store this info as an attribute in the canvas handle. 
+	# Get the last key pressed. We store this info as an attribute in the canvas handle.
 	# MANDATORY: for this to work it is crutial that the WindowButtonDownFcn() callback function
 	# is set and calls the set_current_character() function (which sets the appropriate attribute)
 	cc = getappdata(canvas, "CurrentCharacter")

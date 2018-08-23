@@ -1,12 +1,14 @@
 module cdtest_
 
-using IUP
-using IUP_IM
-using IUP_CD
+using Printf
 
-include("../src/libiup_h.jl")
-include("../src/im_process_h.jl")
-include("../src/cdiup_h.jl")
+using IUP
+using IUP.IM
+using IUP.CD
+
+# include("../src/libiup_h.jl")
+# include("../src/im_process_h.jl")
+# include("../src/cdiup_h.jl")
 
 include("cdtest_h.jl")
 #include("cdtest.jl")
@@ -14,7 +16,7 @@ include("cdtest_h.jl")
 export
   cdtest
 
-type tCTC_l
+mutable struct tCTC_l
     iup_canvas::Ptr{cdCanvas}
 end
 
@@ -22,70 +24,70 @@ global antialias = 1
 
 global ctgc = tCTC(
         C_NULL,
-        int32(0), int32(0), 0.0, int32(0),
+        Int32(0), Int32(0), 0.0, Int32(0),
         C_NULL,
-        int32(0),
-        C_NULL,
-        C_NULL,
-        int32(0),
-        C_NULL,
-        int32(0),
+        Int32(0),
         C_NULL,
         C_NULL,
-        uint32(0),
-        int32(0),
-        int32(0),
-        int32(0),
-        int32(0),
-        int32(0),
-        int32(0),
-        int32(0),
-        int32(0),
-        int32(0),
-        int32(0),
-        int32(0),
-        int32(0),
-        int32(0),
-        int32(0),
+        Int32(0),
+        C_NULL,
+        Int32(0),
+        C_NULL,
+        C_NULL,
+        UInt32(0),
+        Int32(0),
+        Int32(0),
+        Int32(0),
+        Int32(0),
+        Int32(0),
+        Int32(0),
+        Int32(0),
+        Int32(0),
+        Int32(0),
+        Int32(0),
+        Int32(0),
+        Int32(0),
+        Int32(0),
+        Int32(0),
         0.0,
-        int32(0),
-        int32(0),
-        int32(0),
-        int32(0),
-        int32(0),
-        int32(0),
-        int32(0),
+        Int32(0),
+        Int32(0),
+        Int32(0),
+        Int32(0),
+        Int32(0),
+        Int32(0),
+        Int32(0),
 #       Array_100_Cuchar,
 #        Array_100_Clong,
 #        Array_4_Cint,
-        int32(0),
-        int32(0),
-        int32(0),
-        int32(0),
-        int32(0),
+        Int32(0),
+        Int32(0),
+        Int32(0),
+        Int32(0),
+        Int32(0),
         C_NULL,
         C_NULL,
         C_NULL,
-        int32(0),
-        int32(0),
+        Int32(0),
+        Int32(0),
         C_NULL,
-        int32(0),
+        Int32(0),
 #        Array_300_tPoint,
-#        Array_256_Uint8,
-#        Array_80_Uint8,
-        int32(0),
-        int32(0),
-#        Array_40_Uint8,
-        int32(0),
-        int32(0)
+#        Array_256_UInt8,
+#        Array_80_UInt8,
+        Int32(0),
+        Int32(0),
+#        Array_40_UInt8,
+        Int32(0),
+        Int32(0)
 #        Ptr{tList}
     )
 
-global box_pos   = tBoxPos(int32(0), int32(0), int32(0), int32(0), int32(0), int32(0))
-global arc_pos   = tArcPos(int32(0), int32(0), int32(0), int32(0), 0.0, 0.0)
-global line_pos  = tLinePos(int32(0), int32(0), int32(0), int32(0))
-global mark_pos  = tMarkPos(int32(0), int32(0), int32(0))
-global pixel_pos = tPixelPos(int32(0), int32(0))
+global box_pos   = tBoxPos(Int32(0), Int32(0), Int32(0), Int32(0), Int32(0), Int32(0))
+global arc_pos   = tArcPos(Int32(0), Int32(0), Int32(0), Int32(0), 0.0, 0.0)
+global line_pos  = tLinePos(Int32(0), Int32(0), Int32(0), Int32(0))
+global mark_pos  = tMarkPos(Int32(0), Int32(0), Int32(0))
+global pixel_pos = tPixelPos(Int32(0), Int32(0))
 global fl_nx, fl_ny, fl_mx, fl_my
 global line_x1, line_x2, line_y1, line_y2
 global line_lastwhat = CLOSE
@@ -101,7 +103,7 @@ function cdtest()
 	IupOpen() 		#Initializes IUP
 
 	# carrega o LED
-	err = IupLoad("C:/programs/Gits/IUP.jl/examples/cdtest.led")
+	err = IupLoad("./cdtest.led")
 	#cdtest_loadled()
 
 	if(err == C_NULL)	# inicializa o CDTest
@@ -129,14 +131,14 @@ function CDTestInit()
 	IupShow(IupGetHandle("dlgMain"))
 
 	# inicializacao da barra de cores */
-	ctgc.foreground = int32(0);		ctgc.background = int32(0)
+	ctgc.foreground = Int32(0);		ctgc.background = Int32(0)
 	#ColorBarInit(IupGetHandle("dlgMain"), IupGetHandle("cnvColorBar"), convert(Ptr{Clong},ctgc.foreground), convert(Ptr{Clong},ctgc.background))
 
 	# cria o canvas do CD associado ao canvas do IUP */
 	ctgc.iup_canvas = cdCreateCanvas(cdContextIup(), IupGetHandle("cnvMain"))
 
-w = convert(Ptr{Cint}, [int32(0)])
-h = convert(Ptr{Cint}, [int32(0)])
+w = convert(Ptr{Cint}, [Int32(0)])
+h = convert(Ptr{Cint}, [Int32(0)])
 cdCanvasGetSize(ctgc.iup_canvas, w, h, C_NULL, C_NULL);
 w = unsafe_load(w)
 h = unsafe_load(h)
@@ -149,7 +151,7 @@ h = unsafe_load(h)
 
 	# os call-backs do canvas devem ser associados depois de sua criacao */
 	#IupSetFunction("cmdRepaint", (Icallback) fRepaint);
-	IupSetFunction("cmdMotionCB", cfunction(fMotionCB, Int, (Ptr{Ihandle}, Cint, Cint, Ptr{Uint8})))
+	IupSetFunction("cmdMotionCB", cfunction(fMotionCB, Int, (Ptr{Ihandle}, Cint, Cint, Ptr{UInt8})))
 	IupSetFunction("cmdButtonCB", cfunction(fButtonCB, Int, (Ptr{Ihandle}, Char, Cint, Cint, Cint, Cint)))
 	#IupSetFunction("cmdResizeCB", (Icallback) fResizeCB);
 	#IupSetFunction("cmdGetFocusCB", (Icallback) fGetFocusCB);
@@ -211,7 +213,7 @@ h = unsafe_load(h)
 	ctgc.res = xres;
 
 	# inicializa o canvas off-screen de double-bufering */
-	#ctgc.buffering = int32(0)
+	#ctgc.buffering = Int32(0)
 	#ctgc.buffer_canvas = C_NULL
 
 	# inicializa o clipping
@@ -240,7 +242,7 @@ h = unsafe_load(h)
 	#set_status();
 
 	# inicializa a posiccao do mouse */
-	mouse_pos(int32(0), int32(0))
+	mouse_pos(Int32(0), Int32(0))
 
 	# constroi os dialogos do CDTest sem mostra-los */
 	IupMap(IupGetHandle("dlgLB"));
@@ -260,7 +262,7 @@ h = unsafe_load(h)
 	if(use_contextplus != 0) cdUseContextPlus(1)	end
 	ctgc.wd_canvas  = cdCreateCanvas(cdContextIup(), IupGetHandle("cnvWDCanvas"));
 	ctgc.pic_canvas = cdCreateCanvas(cdContextIup(), IupGetHandle("cnvPICCanvas"));
-	ctgc.picture    = cdCreateCanvas(cdContextIup(), convert(Ptr{Void}, convert(Ptr{Uint8},"")))
+	ctgc.picture    = cdCreateCanvas(cdContextIup(), convert(Ptr{Void}, convert(Ptr{UInt8},"")))
 	if(use_contextplus != 0) cdUseContextPlus(0)	end
 
 	# CDTEST default values */
@@ -608,8 +610,8 @@ function fButtonCB(self::Ptr{Ihandle}, b::Char, e::Integer, x::Integer, y::Integ
 
 	yp = convert(Ptr{Cint}, [y]);
 	cdUpdateYAxis(yp)
-	y = int32(unsafe_load(yp))
-	x = int32(x)				# <=========== NAO DEVIA SER Int64
+	y = Int32(unsafe_load(yp))
+	x = Int32(x)				# <=========== NAO DEVIA SER Int64
 	mouse_pos(x, y)
 
 	if(b == IUP_BUTTON1)
@@ -710,7 +712,7 @@ function iscurvisible()
 end
 
 # ------------------------------------------------------------------------
-function fMotionCB(self::Ptr{Ihandle}, x::Int32, y::Int32, r::Ptr{Uint8})
+function fMotionCB(self::Ptr{Ihandle}, x::Int32, y::Int32, r::Ptr{UInt8})
 
 	if(ctgc.iup_canvas == C_NULL)
 		return IUP_DEFAULT
@@ -719,7 +721,7 @@ function fMotionCB(self::Ptr{Ihandle}, x::Int32, y::Int32, r::Ptr{Uint8})
 	cdActivate(ctgc.iup_canvas)
 	yp = convert(Ptr{Cint}, [y]);
 	cdUpdateYAxis(yp)
-	y = int32(unsafe_load(yp))
+	y = Int32(unsafe_load(yp))
 	mouse_pos(x, y)
 
 	if(ctgc.following != 0)
@@ -908,7 +910,7 @@ global poly_x1, poly_x2, poly_y1, poly_y2
 		if(poly_lastwhat != CLOSE)
 			cdLine(poly_x1, poly_y1, poly_x2, poly_y2);        # apaga o ultimo segmento */
 			# apaga o poligono temporario inteiro */
-			for(i = 1:ctgc.num_points-1)
+			for i = (1:ctgc.num_points-1)
 				cdLine(ctgc.points[i].x, ctgc.points[i].y, ctgc.points[i+1].x, ctgc.points[i+1].y);
 			end
 		end
@@ -1098,7 +1100,7 @@ function draw()
 	elseif(ctgc.cur_prim == POLY)
 		if(ctgc.num_points > 1)
 			cdBegin(ctgc.poly_mode);
-			for(a = 1:ctgc.num_points)
+			for a = (1:ctgc.num_points)
 				cdVertex(ctgc.points[a].x,ctgc.points[a].y);
 			end
 			cdEnd()
