@@ -23,6 +23,8 @@ function cbox()
 
 	# Don't understand. The profiler reports minuscule times(max = 0.03 s)
 	# but the whole thing takes about ~3.4 s(first run)
+	# -- obviously result of it being compiled when first called. the time is spent in the compiler,
+	# not in the profiled function ...
 	#@iprofile report
 end
 

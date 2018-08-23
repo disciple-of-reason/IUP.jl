@@ -4,13 +4,15 @@
 @static Sys.iswindows() ? (const iup = "iup") : (const iup = "libiup")  # Name of IUP shared lib.
 
 
-function IupVbox(c1::Ptr{Ihandle}, c2=C_NULL, c3=C_NULL, c4=C_NULL, c5=C_NULL, c6=C_NULL, c7=C_NULL, c8=C_NULL, c9=C_NULL,
-		c10=C_NULL, c11=C_NULL, c12=C_NULL, c13=C_NULL, c14=C_NULL, c15=C_NULL)
-	ccall((:IupVbox, iup), Ptr{Ihandle}, (Ptr{Ihandle}, Ptr{Ihandle}, Ptr{Ihandle}, Ptr{Ihandle}, Ptr{Ihandle},
-		Ptr{Ihandle}, Ptr{Ihandle}, Ptr{Ihandle}, Ptr{Ihandle}, Ptr{Ihandle}, Ptr{Ihandle}, Ptr{Ihandle},
-		Ptr{Ihandle}, Ptr{Ihandle}, Ptr{Ihandle}),
-		c1, c2, c3, c4, c5, c6, c7, c8, c9, c10, c11, c12, c13, c14, c15)
-end
+# function IupVbox(c1::Ptr{Ihandle}, c2=C_NULL, c3=C_NULL, c4=C_NULL, c5=C_NULL, c6=C_NULL, c7=C_NULL, c8=C_NULL, c9=C_NULL,
+# 		c10=C_NULL, c11=C_NULL, c12=C_NULL, c13=C_NULL, c14=C_NULL, c15=C_NULL)
+# 	ccall((:IupVbox, iup), Ptr{Ihandle}, (Ptr{Ihandle}, Ptr{Ihandle}, Ptr{Ihandle}, Ptr{Ihandle}, Ptr{Ihandle},
+# 		Ptr{Ihandle}, Ptr{Ihandle}, Ptr{Ihandle}, Ptr{Ihandle}, Ptr{Ihandle}, Ptr{Ihandle}, Ptr{Ihandle},
+# 		Ptr{Ihandle}, Ptr{Ihandle}, Ptr{Ihandle}),
+# 		c1, c2, c3, c4, c5, c6, c7, c8, c9, c10, c11, c12, c13, c14, c15)
+# end
+
+IupVbox(controls::Ptr{Ihandle} ...) = ccall((:IupVbox, iup), (Ptr{Ihandle}...), controls...)
 
 function IupHbox(c1::Ptr{Ihandle}, c2=C_NULL, c3=C_NULL, c4=C_NULL, c5=C_NULL, c6=C_NULL, c7=C_NULL, c8=C_NULL, c9=C_NULL,
 		c10=C_NULL, c11=C_NULL, c12=C_NULL, c13=C_NULL, c14=C_NULL, c15=C_NULL)
