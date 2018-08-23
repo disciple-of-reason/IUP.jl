@@ -2,6 +2,15 @@
 
 GUI building, using the [IUP library](http://www.tecgraf.puc-rio.br/iup/)
 
+Work in progress update for Julia v1
+
+Working/tested examples:
+- button
+- backgroundbox
+- dialog1
+- tree
+
+
 ## Installation
 
 Prior to using this library, you must install `IUP` on your computer. You will need both the `IUP` and the two subsidiary libs `IM`  and `CD`.
